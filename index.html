@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexQuiz — Đạo Đức Nghề Luật Sư</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── RECAPO-INSPIRED PALETTE ── */
+:root {
+  /* Background layers */
+  --bg-page:    #f7f5f2;
+  --bg-surface: #ffffff;
+  --bg-muted:   #f0ede8;
+  --bg-subtle:  #eae7e1;
+
+  /* Brand / Accent */
+  --accent:     #1a56db;   /* Recapo primary blue */
+  --accent-lt:  #ebf1fd;
+  --accent-dk:  #1040b0;
+
+  /* Gold / warm tone from scales of justice */
+  --warm:       #d97706;
+  --warm-lt:    #fef3c7;
+  --warm-dk:    #b45309;
+
+  /* Text */
+  --text-pri:   #111827;
+  --text-sec:   #374151;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+
+  /* Borders */
+  --border:     #e5e7eb;
+  --border-md:  #d1d5db;
+
+  /* Semantic */
+  --green:      #065f46;
+  --green-bg:   #d1fae5;
+  --green-bd:   #6ee7b7;
+  --red:        #991b1b;
+  --red-bg:     #fee2e2;
+  --red-bd:     #fca5a5;
+
+  /* Ink dark (for banners) */
+  --ink:        #0f172a;
+  --ink2:       #1e293b;
+
+  --radius-sm:  8px;
+  --radius:     12px;
+  --radius-lg:  18px;
+  --radius-xl:  24px;
+
+  --shadow-xs: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.04);
+  --shadow:    0 4px 16px rgba(0,0,0,.09), 0 2px 6px rgba(0,0,0,.05);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.13), 0 4px 14px rgba(0,0,0,.07);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: var(--bg-page);
+  color: var(--text-pri);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  position: sticky; top: 0; z-index: 300;
+  background: rgba(15,23,42,0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+}
+.tb-left { display: flex; align-items: center; gap: 10px; }
+.tb-logo {
+  width: 32px; height: 32px; border-radius: 9px;
+  background: linear-gradient(135deg, #1a56db 0%, #6366f1 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.tb-name { color: #f8fafc; font-weight: 700; font-size: .95rem; letter-spacing: -.01em; }
+.tb-dot { color: rgba(255,255,255,0.2); font-size: .7rem; }
+.tb-sub { color: rgba(255,255,255,0.4); font-size: .72rem; }
+.tb-badge {
+  background: rgba(26,86,219,0.25);
+  border: 1px solid rgba(26,86,219,0.4);
+  color: #93c5fd;
+  border-radius: 20px; padding: 3px 11px;
+  font-size: .7rem; font-weight: 600; letter-spacing: .03em;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; }
+.container { max-width: 720px; margin: 0 auto; padding: 32px 18px 60px; }
+
+/* ── HOME HERO ── */
+.hero-banner {
+  position: relative; border-radius: var(--radius-xl); overflow: hidden;
+  height: 240px; margin-bottom: 24px;
+  background: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+.hero-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: .28;
+  transition: opacity .4s;
+}
+.hero-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, rgba(15,23,42,.9) 0%, rgba(30,41,59,.5) 60%, rgba(26,86,219,.2) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  height: 100%; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 28px;
+}
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(26,86,219,.3);
+  border: 1px solid rgba(99,102,241,.4);
+  color: #a5b4fc;
+  border-radius: 20px; padding: 4px 12px;
+  font-size: .7rem; font-weight: 600; letter-spacing: .05em;
+  text-transform: uppercase; margin-bottom: 10px;
+  width: fit-content;
+}
+.hero-title {
+  font-size: 1.75rem; font-weight: 800;
+  color: #f8fafc; line-height: 1.22;
+  letter-spacing: -.02em;
+}
+.hero-desc { color: rgba(255,255,255,.55); font-size: .82rem; margin-top: 7px; font-weight: 400; }
+
+/* ── STAT CARDS ── */
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
+.stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 14px; text-align: center;
+  box-shadow: var(--shadow-xs);
+  transition: transform .15s, box-shadow .15s;
+}
+.stat-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.stat-n {
+  font-size: 1.9rem; font-weight: 800;
+  color: var(--text-pri); line-height: 1;
+  letter-spacing: -.03em;
+}
+.stat-l { font-size: .7rem; color: var(--text-muted); margin-top: 5px; font-weight: 500; }
+.stat-card.blue .stat-n  { color: var(--accent); }
+.stat-card.amber .stat-n { color: var(--warm); }
+
+/* ── BUTTONS ── */
+.btn-stack { display: flex; flex-direction: column; gap: 10px; }
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 22px; border: none; border-radius: var(--radius);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: .93rem; font-weight: 600;
+  cursor: pointer; transition: all .15s ease;
+  letter-spacing: -.01em; text-decoration: none;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(26,86,219,.3), 0 1px 3px rgba(26,86,219,.2);
+}
+.btn-primary:hover { background: var(--accent-dk); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,86,219,.35); }
+.btn-warm {
+  background: var(--warm);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(217,119,6,.25);
+}
+.btn-warm:hover { background: var(--warm-dk); transform: translateY(-1px); }
+.btn-outline {
+  background: var(--bg-surface);
+  color: var(--text-sec);
+  border: 1px solid var(--border-md);
+  box-shadow: var(--shadow-xs);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); font-size: .82rem; }
+.btn-ghost:hover { color: var(--text-sec); background: var(--bg-muted); }
+.btn-sm { padding: 9px 16px; font-size: .84rem; border-radius: var(--radius-sm); }
+.btn:disabled { opacity: .38; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.n-badge {
+  background: var(--red-bg); color: var(--red);
+  border-radius: 20px; padding: 2px 8px;
+  font-size: .68rem; font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ── QUIZ HEADER ── */
+.quiz-bar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px; margin-bottom: 14px;
+  box-shadow: var(--shadow-xs);
+}
+.qb-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.mode-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--accent-lt); color: var(--accent);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: .68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+.mode-pill.review { background: var(--warm-lt); color: var(--warm-dk); }
+.prog-wrap { height: 5px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; }
+.prog-bar {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, #6366f1 100%);
+  transition: width .45s cubic-bezier(.4,0,.2,1);
+}
+.qb-nums { font-size: .8rem; color: var(--text-muted); font-weight: 500; }
+
+/* ── QUESTION CARD ── */
+.q-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+  animation: qIn .22s ease;
+}
+@keyframes qIn { from { opacity:0; transform: translateY(7px); } to { opacity:1; transform:none; } }
+
+.q-visual {
+  position: relative; height: 175px;
+  overflow: hidden;
+  background: var(--ink);
+}
+.q-visual-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: .38;
+}
+.q-visual-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, rgba(15,23,42,.5) 0%, rgba(15,23,42,.85) 100%);
+}
+.q-visual-meta {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 14px 18px;
+}
+.q-topic-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(26,86,219,.5);
+  border: 1px solid rgba(99,102,241,.35);
+  backdrop-filter: blur(6px);
+  color: #c7d2fe;
+  border-radius: 20px; padding: 4px 11px;
+  font-size: .68rem; font-weight: 600; letter-spacing: .04em;
+  width: fit-content;
+}
+.q-file-ref {
+  font-size: .75rem; color: rgba(255,255,255,.6);
+  font-weight: 500;
+}
+.q-file-ref strong { color: rgba(255,255,255,.9); font-weight: 700; }
+
+.q-body { padding: 22px 22px 6px; }
+.q-text {
+  font-size: 1rem; line-height: 1.72;
+  color: var(--text-pri); font-weight: 400;
+}
+
+/* ── OPTIONS ── */
+.opts { padding: 14px 22px 4px; display: flex; flex-direction: column; gap: 8px; }
+.opt {
+  width: 100%; text-align: left;
+  background: var(--bg-page);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 13px 16px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: .91rem; line-height: 1.5; font-weight: 400;
+  color: var(--text-sec);
+  cursor: pointer;
+  transition: all .14s ease;
+  display: flex; align-items: flex-start; gap: 11px;
+}
+.opt:hover:not(:disabled) {
+  background: var(--accent-lt);
+  border-color: var(--accent);
+  color: var(--text-pri);
+  transform: translateX(3px);
+}
+.opt-key {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 6px; width: 24px; height: 24px; min-width: 24px;
+  font-size: .72rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px; flex-shrink: 0;
+  transition: background .12s;
+}
+.opt.correct { background: var(--green-bg); border-color: var(--green-bd); }
+.opt.correct .opt-key { background: var(--green); }
+.opt.correct .opt-label { color: var(--green); font-weight: 500; }
+.opt.wrong { background: var(--red-bg); border-color: var(--red-bd); }
+.opt.wrong .opt-key { background: var(--red); }
+.opt.wrong .opt-label { color: var(--red); }
+.opt:disabled { cursor: default; transform: none; }
+
+/* ── EXPLANATION ── */
+.exp-wrap { padding: 0 22px 22px; }
+.exp-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 15px;
+  display: none;
+}
+.exp-box.show { display: block; animation: qIn .2s ease; }
+.exp-head {
+  font-size: .7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: var(--accent); margin-bottom: 6px;
+  display: flex; align-items: center; gap: 5px;
+}
+.exp-text { font-size: .87rem; line-height: 1.68; color: var(--text-sec); }
+
+/* ── NAV ROW ── */
+.nav-row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
+
+/* ── RESULT BANNER ── */
+.result-banner {
+  position: relative; border-radius: var(--radius-xl); overflow: hidden;
+  background: var(--ink); margin-bottom: 20px;
+  box-shadow: var(--shadow-lg);
+}
+.rb-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .2; }
+.rb-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(15,23,42,.95) 0%, rgba(26,86,219,.4) 100%);
+}
+.rb-body { position: relative; z-index: 2; padding: 36px 28px; text-align: center; }
+.rb-pct {
+  font-size: 4.5rem; font-weight: 800;
+  color: #f8fafc; line-height: 1;
+  letter-spacing: -.04em;
+}
+.rb-label { color: rgba(255,255,255,.45); font-size: .8rem; margin: 4px 0 16px; }
+.grade-chip {
+  display: inline-block; padding: 6px 20px;
+  border-radius: 20px; font-weight: 700; font-size: .9rem;
+  margin-bottom: 22px;
+}
+.g-a { background: #d1fae5; color: #065f46; }
+.g-b { background: var(--accent-lt); color: var(--accent); }
+.g-c { background: var(--warm-lt); color: var(--warm-dk); }
+.g-d { background: var(--red-bg); color: var(--red); }
+
+.rb-stats { display: flex; justify-content: center; gap: 32px; }
+.rbs { text-align: center; }
+.rbs-n { font-size: 1.8rem; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+.rbs-l { font-size: .7rem; color: rgba(255,255,255,.45); margin-top: 3px; }
+.c-emerald { color: #6ee7b7; }
+.c-rose { color: #fca5a5; }
+.c-white { color: rgba(255,255,255,.85); }
+
+/* ── WRONG PANEL ── */
+.wrong-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--red-bd);
+  border-top: 3px solid var(--red);
+  border-radius: var(--radius-lg);
+  padding: 20px; margin-bottom: 20px;
+  box-shadow: var(--shadow-xs);
+}
+.wrong-panel h3 {
+  font-size: .88rem; font-weight: 700; color: var(--red);
+  margin-bottom: 14px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 6px;
+}
+.wi { padding: 9px 0; border-bottom: 1px solid var(--border); font-size: .82rem; }
+.wi:last-child { border-bottom: none; }
+.wi-q { color: var(--text-muted); margin-bottom: 3px; line-height: 1.4; }
+.wi-a { color: var(--green); font-weight: 600; }
+
+/* ── HISTORY ── */
+.page-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 22px;
+}
+.page-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; }
+.hist-list { display: flex; flex-direction: column; gap: 9px; }
+.hi {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-xs);
+  display: flex; align-items: center; gap: 12px;
+  transition: box-shadow .15s;
+}
+.hi:hover { box-shadow: var(--shadow-sm); }
+.hi-icon {
+  width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+  background: var(--accent-lt);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+.hi-icon.review { background: var(--warm-lt); }
+.hi-info { flex: 1; min-width: 0; }
+.hi-name { font-weight: 600; font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hi-date { font-size: .73rem; color: var(--text-muted); margin-top: 2px; }
+.hi-right { text-align: right; flex-shrink: 0; }
+.hi-pct { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
+.hi-sub { font-size: .71rem; color: var(--text-muted); }
+
+.back-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: var(--text-muted); font-size: .82rem; font-weight: 500;
+  background: none; border: none; cursor: pointer;
+  font-family: inherit; padding: 0; margin-bottom: 16px;
+  transition: color .12s;
+}
+.back-btn:hover { color: var(--text-pri); }
+.empty-state {
+  text-align: center; padding: 56px 24px;
+  color: var(--text-muted); font-size: .9rem;
+}
+.empty-ico { font-size: 2.5rem; margin-bottom: 12px; opacity: .4; }
+
+/* ── SECTION DIVIDER ── */
+.divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+@media (max-width: 480px) {
+  .hero-banner { height: 200px; }
+  .hero-title { font-size: 1.45rem; }
+  .stats-row { gap: 8px; }
+  .stat-card { padding: 13px 9px; }
+  .stat-n { font-size: 1.6rem; }
+  .container { padding: 20px 14px 52px; }
+  .q-visual { height: 148px; }
+  .q-body { padding: 17px 17px 4px; }
+  .opts { padding: 12px 17px 4px; }
+  .exp-wrap { padding: 0 17px 17px; }
+  .rb-pct { font-size: 3.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-left">
+    <div class="tb-logo">⚖️</div>
+    <div>
+      <div class="tb-name">LexQuiz</div>
+    </div>
+    <span class="tb-dot">·</span>
+    <span class="tb-sub">Đạo Đức Nghề Luật Sư</span>
+  </div>
+  <div class="tb-badge">213 câu</div>
+</div>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="homeScreen" class="screen active">
+  <div class="container">
+
+    <div class="hero-banner">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80" alt="">
+      <div class="hero-gradient"></div>
+      <div class="hero-content">
+        <div class="hero-chip">⚖️ &nbsp;Ôn thi chứng chỉ hành nghề</div>
+        <div class="hero-title">Trắc Nghiệm Đạo Đức<br>Nghề Luật Sư VN</div>
+        <div class="hero-desc">213 câu · Ôn câu sai · Theo dõi tiến độ</div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-n">213</div>
+        <div class="stat-l">Tổng câu hỏi</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-n" id="statAnswered">0</div>
+        <div class="stat-l">Đã ôn luyện</div>
+      </div>
+      <div class="stat-card amber">
+        <div class="stat-n" id="statWrong">0</div>
+        <div class="stat-l">Câu cần ôn</div>
+      </div>
+    </div>
+
+    <div class="btn-stack">
+      <button class="btn btn-primary" onclick="startQuiz('normal')">
+        <span>📝</span> Bắt đầu bài luyện mới
+        <span style="opacity:.55;font-size:.78rem;font-weight:400">&nbsp;(20 câu ngẫu nhiên)</span>
+      </button>
+      <button class="btn btn-warm" id="btnReview" onclick="startQuiz('review')" disabled>
+        <span>🔁</span> Ôn lại câu sai
+        <span class="n-badge" id="wrongBadge" style="display:none">0</span>
+      </button>
+      <button class="btn btn-outline" onclick="showScreen('historyScreen')">
+        <span>📋</span> Lịch sử bài làm
+      </button>
+      <div class="divider"></div>
+      <button class="btn btn-ghost btn-sm" onclick="confirmReset()">🗑 &nbsp;Xóa toàn bộ dữ liệu</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ QUIZ ══════════ -->
+<div id="quizScreen" class="screen">
+  <div class="container">
+
+    <div class="quiz-bar">
+      <div class="qb-top">
+        <div class="mode-pill" id="modePill">Bài Luyện Tập</div>
+        <div class="qb-nums">Câu <span id="qCur">1</span> / <span id="qTot">20</span></div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-bar" id="progBar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-visual" id="qVisual">
+        <img class="q-visual-img" id="qImg" src="" alt="">
+        <div class="q-visual-overlay"></div>
+        <div class="q-visual-meta">
+          <div class="q-topic-tag" id="qTopicTag">⚖️ Luật sư</div>
+          <div class="q-file-ref" id="qFileRef">Câu <strong>#1</strong> trong file Word</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text" id="qText"></div>
+      </div>
+      <div class="opts" id="optsList"></div>
+      <div class="exp-wrap">
+        <div class="exp-box" id="expBox">
+          <div class="exp-head">📖 &nbsp;Giải thích &amp; căn cứ pháp lý</div>
+          <div class="exp-text" id="expText"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-ghost btn-sm" onclick="exitQuiz()">✕ Thoát</button>
+      <button class="btn btn-primary btn-sm" id="btnNext" onclick="nextQ()" style="display:none">Câu tiếp →</button>
+      <button class="btn btn-warm btn-sm" id="btnFinish" onclick="finishQuiz()" style="display:none">Xem kết quả ✓</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ RESULT ══════════ -->
+<div id="resultScreen" class="screen">
+  <div class="container">
+    <button class="back-btn" onclick="showScreen('homeScreen')">← Trang chủ</button>
+
+    <div class="result-banner">
+      <img class="rb-img" src="https://images.unsplash.com/photo-1521791055366-0d553872952f?w=900&q=80" alt="">
+      <div class="rb-grad"></div>
+      <div class="rb-body">
+        <div class="rb-pct" id="rScore">0%</div>
+        <div class="rb-label">Kết quả bài làm</div>
+        <div class="grade-chip" id="rGrade"></div>
+        <div class="rb-stats">
+          <div class="rbs"><div class="rbs-n c-emerald" id="rCorrect">0</div><div class="rbs-l">Đúng</div></div>
+          <div class="rbs"><div class="rbs-n c-rose" id="rWrong">0</div><div class="rbs-l">Sai</div></div>
+          <div class="rbs"><div class="rbs-n c-white" id="rTotal">0</div><div class="rbs-l">Tổng</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrong-panel" id="wrongSection" style="display:none">
+      <h3>❌ Câu trả lời sai trong bài này</h3>
+      <div id="wrongItems"></div>
+    </div>
+
+    <div class="btn-stack">
+      <button class="btn btn-warm" id="btnResultReview" onclick="startQuiz('review')" style="display:none">
+        🔁 &nbsp;Ôn ngay các câu sai
+      </button>
+      <button class="btn btn-primary" onclick="startQuiz('normal')">📝 &nbsp;Làm bài luyện mới</button>
+      <button class="btn btn-outline" onclick="showScreen('homeScreen')">🏠 &nbsp;Trang chủ</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HISTORY ══════════ -->
+<div id="historyScreen" class="screen">
+  <div class="container">
+    <button class="back-btn" onclick="showScreen('homeScreen')">← Trang chủ</button>
+    <div class="page-head">
+      <span style="font-size:1.4rem">📋</span>
+      <div class="page-title">Lịch Sử Bài Làm</div>
+    </div>
+    <div id="histList" class="hist-list"></div>
+  </div>
+</div>
+
+<script>
+/* ── TOPIC CONFIG ── */
+const TOPICS = {
+  training: {
+    label: '📋 Tập Sự Hành Nghề',
+    imgs: [
+      'https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=800&q=70',
+      'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=70',
+      'https://images.unsplash.com/photo-1521791055366-0d553872952f?w=800&q=70',
+    ]
+  },
+  fee: {
+    label: '💰 Thù Lao Luật Sư',
+    imgs: [
+      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=70',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=70',
+    ]
+  },
+  discipline: {
+    label: '⚠️ Kỷ Luật & Vi Phạm',
+    imgs: [
+      'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=70',
+      'https://images.unsplash.com/photo-1575505586569-646b2ca898fc?w=800&q=70',
+    ]
+  },
+  client: {
+    label: '🤝 Quan Hệ Khách Hàng',
+    imgs: [
+      'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=70',
+      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=70',
+      'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=70',
+    ]
+  },
+  organization: {
+    label: '🏛️ Tổ Chức Đoàn Luật Sư',
+    imgs: [
+      'https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=800&q=70',
+      'https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&q=70',
+      'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=70',
+    ]
+  },
+  court: {
+    label: '⚖️ Tham Gia Tố Tụng',
+    imgs: [
+      'https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=800&q=70',
+      'https://images.unsplash.com/photo-1589216532372-1c2a367900d9?w=800&q=70',
+    ]
+  },
+  license: {
+    label: '📜 Chứng Chỉ Hành Nghề',
+    imgs: [
+      'https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=800&q=70',
+      'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=70',
+      'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=70',
+    ]
+  },
+  ethics: {
+    label: '✨ Đạo Đức Nghề Nghiệp',
+    imgs: [
+      'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=70',
+      'https://images.unsplash.com/photo-1521791055366-0d553872952f?w=800&q=70',
+    ]
+  },
+  lawfirm: {
+    label: '🏢 Tổ Chức Hành Nghề',
+    imgs: [
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=70',
+      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&q=70',
+    ]
+  },
+  general: {
+    label: '⚖️ Pháp Luật Luật Sư',
+    imgs: [
+      'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=70',
+      'https://images.unsplash.com/photo-1521791055366-0d553872952f?w=800&q=70',
+      'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=70',
+    ]
+  }
+};
+
+const QUESTIONS = [
+{"id": 1, "q": "Ban Chủ nhiệm Đoàn Luật sư có quyền từ chối việc Luật sư rút tên khỏi danh sách luật sư của Đoàn Luật sư trong trường hợp:", "opts": {"a": "Đang trong quá trình giải quyết khiếu nại, tố cáo liên quan đến hoạt động hành nghề luật sư", "b": "Đang trong quá trình giải quyết tranh chấp với khách hàng", "c": "Trong thời hạn sáu tháng kể từ ngày quyết định kỷ luật bằng hình thức cảnh cáo có hiệu lực", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d: abc đều đúng Khoản 2 điều 32 Quyết định 856/QĐ-TTg năm 2022 phê duyệt Điều lệ Liên đoàn Luật sư Việt Nam", "topic": "organization"},
+{"id": 2, "q": "Báo cáo quá trình tập sự hành nghề luật sư của người tập sự phải có:", "opts": {"a": "Nhận xét, chữ ký của luật sư hướng dẫn.", "b": "Xác nhận của tổ chức hành nghề luật sư nhận tập sự.", "c": "Đánh giá của đoàn luật sư về tư cách đạo đức, ý thức tuân thủ pháo luật của người tập sự.", "d": "Phải có đủ ba nội dung trên."}, "ans": "d", "exp": "Đáp án đúng là: d. Phải có đủ ba nội dung trên.(Khoản 2, Điều 7 Thông tư 10/2021/TT-BTP)", "topic": "training"},
+{"id": 3, "q": "Bộ tư pháp thống nhất quản lý nhà nước về luật sư và hành nghề luật sư.", "opts": {"a": "Đúng", "b": "Sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Sai (Chính phủ thống nhất quản lý nhà nước về luật sư và hành nghề luật sư. Bộ Tư pháp chịu trách nhiệm trước Chính phủ thực hiện quản lý nhà nước về luật sư và hành nghề luật sư và có các nhiệm vụ, quyền hạn sau đây:... (Điều 83 Luật luật sư 2006 (Điều này được sửa đổi bởi Khoản 32 Điều 1 Luật Luật sư sửa đổi 2012))", "topic": "license"},
+{"id": 4, "q": "Chi nhánh của công ty luật nước ngoài tại Việt Nam được nhận người tập sự hành nghề luật sư khi nào", "opts": {"a": "Khi có sự đồng ý bằng văn bản của Sở Tư pháp nơi Chi nhánh của công ty luật nước ngoài tại Việt Nam đặt trụ sở", "b": "Khi có sự đồng ý bằng văn bản của Liên đoàn luật sư Việt Nam", "c": "Khi có sự đồng ý bằng văn bản của Đoàn luật sư nơi Chi nhánh của công ty luật nước ngoài tại Việt Nam đặt trụ sở", "d": "Khi có ủy quyền bằng văn bản của Giám đốc công ty luật nước ngoài tại Việt Nam"}, "ans": "d", "exp": "Đáp án đúng là: d) Khi có ủy quyền bằng văn bản của Giám đốc công ty luật nước ngoài tại Việt Nam(Phải lựa chọn và thỏa thuận với giám đốc thì mới được tập sự, khoản 1 điều 4 Thông tư 10/2021/TT-BTP)", "topic": "training"},
+{"id": 5, "q": "Chi nhánh của tổ chức hành nghề luật sư được thành lập ở:", "opts": {"a": "Trong phạm vi tỉnh, thành phố trực thuộc trung ương nơi tổ chức hành nghề luật sư đăng ký hoạt động", "b": "Ngoài phạm vi tỉnh, thành phố trực thuộc trung ương nơi tổ chức hành nghề luật sư đăng ký hoạt động.", "c": "Trong hoặc ngoài phạm vi tỉnh, thành phố trực thuộc trung ương nơi tổ chức hành nghề luật sư đăng ký hoạt động."}, "ans": "c", "exp": "Đáp án đúng là: c. Trong hoặc ngoài phạm vi tỉnh, thành phố trực thuộc trung ương nơi tổ chức hành nghề luật sư đăng ký hoạt động.(khoản 1 điều 41 Luật luật sư sdbs 2012)", "topic": "license"},
+{"id": 6, "q": "Chi nhánh, Công ty Luật nước ngoài hành nghề tại Việt Nam được hành nghề trong phạm vi sau:", "opts": {"a": "Cử luật sư Việt Nam trong tổ chức hành nghề của mình tham gia tố tụng với tư cách là người đại diện, người bào chữa, người bảo vệ quyền và lợi ích hợp pháp của đương sự trước Tòa án Việt", "b": "Cử luật sư Việt Nam trong tổ chức hành nghề của mình thực hiện các dịch vụ về giấy tờ pháp lý và công chứng liên quan tới pháp luật Việt", "c": "a và b đều đúng.", "d": "a và b đều sai"}, "ans": "d", "exp": "Đáp án đúng là: d  vì a và b đều sai không được cử luật sư nước ngoài và luật sư Việt Nam trong tổ chức hành nghề của mình tham gia tố tụng với tư cách là người đại diện (theo điều 70 Luật luật sư sđbs 2012)", "topic": "license"},
+{"id": 7, "q": "Chi nhánh, văn phòng giao dịch của tổ chức hành nghề luật sư chấm dứt hoạt động trong trường hợp:", "opts": {"a": "Theo quyết định của tổ chức hành nghề luật sư đã thành lập chi nhánh, văn phòng giao dịch.", "b": "Tổ chức hành nghề luật sư đã thành lập chi nhánh, văn phòng giao dịch chấm dứt hoạt động.", "c": "Bị thu hồi Giấy đăng ký hoạt động của chi nhánh.", "d": "Cả 3 câu trên đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng.(theo khoản 1 điều 48 Luật luật sư sđbs 2012)", "topic": "license"},
+{"id": 8, "q": "Chủ nhiệm và Phó Chủ nhiệm của Đoàn luật sư bị Đại hội Đoàn Luật sư bãi nhiệm trong trường hợp:", "opts": {"a": "Không còn sự tín nhiệm của ít nhất ba phần tư số thành viên của Đoàn luật sư.", "b": "Bị xử lý kỷ luật bằng hình thức cảnh cáo.", "c": "Bị kết án và bản án đã có hiệu lực.", "d": "Cả 3 câu đều đúng"}, "ans": "c", "exp": "Đáp án đúng là: c. Bị kết án và bản án đã có hiệu lực.", "topic": "organization"},
+{"id": 9, "q": "Chủ tịch và Phó Chủ tịch Liên đoàn luật sư Việt Nam do cơ quan nào bầu", "opts": {"a": "Bộ Tư pháp", "b": "Đại hội đại biểu luật sư toàn quốc", "c": "Hội đồng luật sư toàn quốc", "d": "Ban Thường vụ Liên đoàn luật sư Việt Nam"}, "ans": "b", "exp": "Đáp án đúng là: b. Đại hội đại biểu luật sư toàn quốc(khoản 1 Điều 10 Điều lệ Liên đoàn Luật sư Việt Nam)", "topic": "organization"},
+{"id": 10, "q": "Chức năng xã hội luật sư là:", "opts": {"a": "Bảo vệ quyền con người, đấu tranh với các hiện tượng tiêu cực của xã hội. b. Góp phần bảo vệ công lý, tự do, dân chủ công dân, lợi ích hợp pháp của cá nhân, cơ quan tổ chức, phát triển kinh tế – xã hội.", "c": "Xây dựng nhà nước pháp quyền xã hội chủ nghĩa, xã hội dân chủ, công bằng, văn minh.", "d": "Cả ba phương án trên."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả ba phương án trên.(Điều 3 LLS –VBHN 2015).", "topic": "general"},
+{"id": 11, "q": "Chứng chỉ hành nghề luật sư bị thu hồi khi:", "opts": {"a": "Không còn thường trú tại Việt Nam.", "b": "Bị kết án và bản án đã có hiệu lực pháp luật.", "c": "Được tuyển dụng, bổ nhiệm là cán bộ, công chức, viên chức.", "d": "Tất cả các trường hợp trên."}, "ans": "d", "exp": "Đáp án đúng là: d. Tất cả các trường hợp trên.(Khoản 1, điều 18 VBHN LLS 2015)", "topic": "license"},
+{"id": 13, "q": "Công ty luật hợp danh có thể chuyển đổi sang hình thức nào sau đây?", "opts": {"a": "Văn phòng luật sư", "b": "Công ty luật trách nhiệm hữu hạn", "c": "Văn phòng luật sư hoặc Công ty luật trách nhiệm hữu hạn", "d": "Cả ba phương án trên đều đúng"}, "ans": "b", "exp": "Đáp án đúng là: b) Công ty luật trách nhiệm hữu hạn(khoản 1 Điều 14 Nghị định 123/2013/NĐ-CP)", "topic": "lawfirm"},
+{"id": 14, "q": "Công ty luật TNHH hai thành viên trở lên có thể chuyển đổi sang hình thức nào sau đây:", "opts": {"a": "Văn phòng luật sư.", "b": "Công ty luật hợp danh.", "c": "Công ty luật TNHH một thành viên.", "d": "Phương án b và c đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Phương án b và c đều đúng.(khoản 1 Điều 14 Nghị định 123/2013/NĐ-CP)", "topic": "lawfirm"},
+{"id": 15, "q": "Công ty luật trách nhiệm hữu hạn có thể sáp nhập với loại hình công ty luật nào dưới đây?", "opts": {"a": "Một hoặc nhiều công ty luật trách nhiệm hữu hạn.", "b": "Một hoặc nhiều công ty luật hợp danh.", "c": "Cả hai phương án trên đều đúng.", "d": "Cả hai phương án trên đều sai."}, "ans": "a", "exp": "Đáp án đúng là: a. Một hoặc nhiều công ty luật trách nhiệm hữu hạn.(Khoản 1, điều 13 NĐ 123/2013/NĐ-CP)", "topic": "lawfirm"},
+{"id": 17, "q": "Công ty luật trách nhiệm hữu hạn hai thành viên trở lên có thể chuyển đổi sang hình thức nào sau đây?", "opts": {"a": "Văn phòng luật sư", "b": "Công ty luật hợp danh và Công ty luật trách nhiệm hữu hạn một thành viên", "c": "Phương án a và b đều đúng", "d": "Phương án a và b đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b) Công ty luật hợp danh và Công ty luật trách nhiệm hữu hạn một thành viên(khoản 1 Điều 14 Nghị định 123/2013/NĐ-CP)", "topic": "lawfirm"},
+{"id": 18, "q": "Cơ quan có thẩm quyền cấp Giấy đăng ký hoạt động cho tổ chức hành nghề luật sư là:", "opts": {"a": "Ủy ban nhân dân cấp tỉnh, thành nơi có tổ chức hành nghề luật sư", "b": "Sở Kế hoạch và đầu tư nơi có tổ chức hành nghề luật sư", "c": "Sở Tư pháp nơi có tổ chức hành nghề luật sư", "d": "Ban Chủ nhiệm Đoàn Luật sư nơi có tổ chức hành nghề luật sư"}, "ans": "c", "exp": "Đáp án đúng là: c. Sở Tư pháp nơi có tổ chức hành nghề luật sư", "topic": "license"},
+{"id": 19, "q": "Cơ quan có thẩm quyền giải quyết khiếu nại của Luật sư đối với quyết định kỷ luật Luật sư của Ban Chủ nhiệm Đoàn Luật sư là:", "opts": {"a": "Ban Chủ nhiệm Đoàn Luật sư", "b": "Hội đồng Khen thưởng – Kỷ luật của Đoàn Luật sư", "c": "Chủ tịch Liên đoàn luật sư Việt Nam", "d": "Ban thường vụ Liên đoàn luật sư Việt Nam"}, "ans": "d", "exp": "Đáp án đúng là: d. Ban thường vụ Liên đoàn luật sư Việt Nam", "topic": "discipline"},
+{"id": 20, "q": "Cơ quan có thẩm quyền thu hồi Thẻ luật sư là:", "opts": {"a": "Bộ Tư pháp", "b": "Liên đoàn luật sư Việt Nam", "c": "Ban Chủ nhiệm Đoàn Luật sư nơi luật sư đó là thành viên", "d": "Cả 3 câu trên đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Liên Đoàn LSVN (Nguyên tắc Cơ quan nào cấp thì có quyền thu hồi)", "topic": "license"},
+{"id": 21, "q": "Cơ quan có thẩm quyền xem xét, quyết định kỷ luật luật sư vi phạm là:", "opts": {"a": "Chủ nhiệm Đoàn Luật sư", "b": "Ban Chủ nhiệm Đoàn Luật sư", "c": "Hội đồng Khen thưởng – Kỷ luật của Đoàn Luật sư", "d": "a, b, c đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Ban Chủ nhiệm Đoàn Luật sư", "topic": "discipline"},
+{"id": 22, "q": "Cơ quan có thẩm quyền đề nghị xem xét, quyết định kỷ luật luật sư vi phạm là:", "opts": {"a": "Chủ nhiệm Đoàn Luật sư", "b": "Ban Chủ nhiệm Đoàn Luật sư.", "c": "Hội đồng Khen thưởng – Kỷ luật của Đoàn Luật sư", "d": "Tổ chức hành nghề luật sư nơi luật sư đó là thành viên."}, "ans": "c", "exp": "Đáp án đúng là: C. Hội đồng Khen thưởng – Kỷ luật của Đoàn Luật sư", "topic": "discipline"},
+{"id": 23, "q": "Cơ quan lãnh đạo cao nhất của Liên đoàn luật sư Việt Nam là:", "opts": {"a": "Chủ tịch Liên đoàn luật sư Việt Nam", "b": "Ban Thường vụ Liên đoàn luật sư Việt Nam", "c": "Hội đồng luật sư toàn quốc d . Đại hội đại biểu luật sư toàn quốc"}, "ans": "d", "exp": "Đáp án đúng là: d. Đại hội đại biểu luật sư toàn quốc", "topic": "organization"},
+{"id": 24, "q": "Cơ quan lãnh đạo cao nhất của Đoàn Luật sư là:", "opts": {"a": "Đại hội toàn thể hoặc Đại hội đại biểu luật sư của Đoàn luật sư", "b": "Ban Chủ nhiệm", "c": "Chủ nhiệm", "d": "Hội đồng Khen thưởng – Kỷ luật"}, "ans": "a", "exp": "Đáp án đúng là: a. Đại hội toàn thể hoặc Đại hội đại biểu luật sư của Đoàn luật sư", "topic": "organization"},
+{"id": 25, "q": "Cơ quan nào có thẩm quyền thu hồi Giấy phép thành lập của chi nhánh, công ty luật nước ngoài?", "opts": {"a": "Bộ Kế hoạch và Đầu tư", "b": "Bộ Tư pháp", "c": "Sở Kế hoạch và Đầu tư", "d": "Sở Tư pháp"}, "ans": "b", "exp": "Đáp án đúng là: b) Bộ Tư pháp", "topic": "license"},
+{"id": 26, "q": "Cơ quan nào có thẩm quyền sửa đổi khung phí gia nhập Đoàn Luật sư?", "opts": {"a": "Đại hội Đại biểu Đoàn Luật sư", "b": "Ban Chủ nhiệm Đoàn Luật sư", "c": "Liên đoàn Luật sư Việt Nam", "d": "Bộ Tư pháp"}, "ans": "a", "exp": "Đáp án đúng là: a. Đại hội Đại biểu Đoàn Luật sư", "topic": "fee"},
+{"id": 27, "q": "Cơ quan nào có thẩm quyền thu hồi Giấy đăng ký hoạt động của chi nhánh, công ty luật nước ngoài:", "opts": {"a": "Bộ Kế hoạch và Đầu tư", "b": "Liên đoàn luật sư Việt Nam", "c": "Bộ Tư pháp", "d": "Sở Tư pháp"}, "ans": "d", "exp": "Đáp án đúng là: d) Sở Tư pháp (k2 và k 3 Điều 39 của Nghị định 123/2013/NĐ-CP ngày 14/10/2013)", "topic": "license"},
+{"id": 28, "q": "Dịch vụ pháp lý của luật sư bao gồm:", "opts": {"a": "Tham gia tổ tụng, tư vấn pháp luật", "b": "Đại diện ngoài tố tụng cho khách hàng", "c": "Thực hiện các dịch vụ pháp lý khác", "d": "Cả ba phương án đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d) Cả ba phương án đều đúng", "topic": "general"},
+{"id": 29, "q": "Hoạt động dịch vụ pháp lý khác của luật sư được hiểu là:", "opts": {"a": "Giúp đỡ khách hàng thực hiện công việc liên quan đến thủ tục hành chính", "b": "Giúp đỡ về pháp luật trong trường hợp giải quyết khiếu nại.", "c": "Dịch thuật, xác nhận giấy tờ, các giao dịch.", "d": "Cả 3 câu trên đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng.", "topic": "general"},
+{"id": 30, "q": "Hoạt động tư vấn pháp luật của luật sư được hiểu là:", "opts": {"a": "Đưa ra ý kiến, hướng dẫn khách hàng thực hiện các quyền và nghĩa vụ của họ.", "b": "Giúp khách hàng soạn thảo các giấy tờ liên quan đến việc thực hiện quyền, nghĩa vụ của họ.", "c": "a và b đều đúng.", "d": "a và b đều sai"}, "ans": "c", "exp": "Đáp án đúng là: c. a và b đều đúng.", "topic": "general"},
+{"id": 31, "q": "Hành nghề trong tổ chức hành nghề luật sư bao gồm:", "opts": {"a": "Thành lập tổ chức hành nghề luật sư.", "b": "Làm việc theo hợp đồng lao động cho tổ chức hành nghề luật sư.", "c": "Tham gia thành lập tổ chức hành nghề luật sư.", "d": "Cả ba phương án trên đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả ba phương án trên đều đúng. (Khoản 1, điều 23 LLS VBHN 2015)", "topic": "license"},
+{"id": 32, "q": "Hình thức xử lý vi phạm của luật sư bao gồm:", "opts": {"a": "Xử lý kỷ luật theo luật luật sư.", "b": "Xử lý hành chính.", "c": "Bị truy cứu trách nhiệm hình sự.", "d": "Cả ba trường hợp trên đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả ba trường hợp trên đều đúng. (Khoản 1, điều 89 LLS-VBHN 2015).", "topic": "discipline"},
+{"id": 33, "q": "Khi cung cấp dịch vụ pháp lý cho khách hàng trong vụ án tranh chấp dân sự, luật sư có nghĩa vụ:", "opts": {"a": "Thực hiện công việc như đã thỏa thuận trong hợp đồng", "b": "Thực hiện các quyền và nghĩa vụ của người bảo vệ được quy định trong Bộ luật Tố tụng Dân sự.", "c": "Thực hiện các công việc một cách tận tâm, phát huy năng lực, sử dụng kiến thức chuyên môn, các kỹ năng nghề nghiệp cần thiết để bảo vệ tốt nhất quyền và lợi ích của khách hàng", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "client"},
+{"id": 34, "q": "Khi cung cấp dịch vụ pháp lý cho khách hàng, luật sư không được:", "opts": {"a": "Đưa ra ý kiến chê bai về nghiệp vụ của đồng nghiệp.", "b": "Gây áp lực hoặc đe doạ đồng nghiệp để giành lợi thế cho mình trong hành nghề.", "c": "Môi giới khách hàng cho đồng nghiệp để nhận tiền hoa hồng.", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "client"},
+{"id": 35, "q": "Khi cung cấp dịch vụ pháp lý cho khách hàng, nếu biết đã có luật sư khác nhận vụ việc này từ trước, luật sư có trách nhiệm:", "opts": {"a": "Yêu cầu khách hàng phải cung cấp tài liệu chấm dứt hợp đồng dịch vụ pháp lý với đồng nghiệp mà khách hàng đã từ chối trước khi ký kết hợp đồng dịch vụ pháp lý.", "b": "Gửi thông báo cho đồng nghiệp mà khách hàng đã từ chối để thông tin sự việc khách hàng yêu cầu luật sư cung cấp dịch vụ pháp lý", "c": "Từ chối không ký kết hợp đồng dịch vụ pháp lý và thông báo cho đồng nghiệp mà khách hàng đã từ chối.", "d": "a, b, c đều đúng"}, "ans": "a", "exp": "Đáp án đúng là: a. Yêu cầu khách hàng phải cung cấp tài liệu chấm dứt hợp đồng dịch vụ pháp lý với đồng nghiệp mà khách hàng đã từ chối trước khi ký kết hợp đồng dịch vụ pháp lý.", "topic": "client"},
+{"id": 36, "q": "Khi có sự thay đổi nội dung đăng ký hoạt động của tổ chức hành nghề luật sư, kể từ ngày quyết định thay đổi, tổ chức hành nghề luật sư phải đăng ký với Sở Tư pháp nơi tổ chức hành nghề luật sư đăng ký hoạt động trong thời hạn:", "opts": {"a": "5 ngày làm việc", "b": "7 ngày làm việc", "c": "10 ngày làm việc", "d": "15 ngày làm việc"}, "ans": "c", "exp": "Đáp án đúng là: c. 10 ngày làm việc", "topic": "license"},
+{"id": 37, "q": "Khi gia nhập Đoàn Luật sư, Luật sư phải đóng phí gia nhập theo khung phí gia nhập Đoàn Luật sư do cơ quan nào ban hành?", "opts": {"a": "Đoàn Luật sư nơi Luật sư gia nhập", "b": "Liên đoàn Luật sư Việt Nam", "c": "Bộ Tư pháp", "d": "Cả 3 câu trên đều sai"}, "ans": "a", "exp": "Đáp án đúng là: a. Đoàn Luật sư nơi Luật sư gia nhập", "topic": "fee"},
+{"id": 38, "q": "Khi giải quyết khiếu nại đối với quyết định kỷ luật của Ban Chủ nhiệm Đoàn luật sư, Ban Thường vụ Liên đoàn luật sư Việt Nam có quyền:", "opts": {"a": "Quyết định hình thức kỷ luật khác nhẹ hơn so với hình thức kỷ luật do Ban chủ nhiệm Đoàn luật sư đã quyết định.", "b": "Quyết định hình thức kỷ luật khác nặng hơn so với hình thức kỷ luật do Ban chủ nhiệm Đoàn luật sư đã quyết định.", "c": "a và b đều đúng", "d": "a và b đều sai"}, "ans": "c", "exp": "Đáp án đúng là: C. a và b đều đúng (khoản 3, Đ.43 Điều lệ LĐLS)", "topic": "discipline"},
+{"id": 39, "q": "Khi hoàn thành thời gian tập sự hành nghề luật sư, người tập sự có trách nhiệm gì?", "opts": {"a": "Báo cáo bằng văn bản về quá trình tập sự hành nghề luật sư trong thời gian tập sự cho người đứng đầu tổ chức hành nghề luật sư nhận tập sự", "b": "Báo cáo bằng văn bản về quá trình tập sự hành nghề luật sư trong thời gian tập sự cho người đứng đầu tổ chức hành nghề luật sư nhận tập sự và Đoàn luật sư nơi đăng ký tập sự", "c": "Báo cáo bằng văn bản về quá trình tập sự hành nghề luật sư trong thời gian tập sự cho Đoàn luật sư nơi đăng ký tập sự", "d": "Báo cáo bằng văn bản về quá trình tập sự hành nghề luật sư trong thời gian tập sự cho Đoàn luật sư và Sở Tư pháp nơi đăng ký tập sự"}, "ans": "c", "exp": "Đáp án đúng là: c) Báo cáo bằng văn bản về quá trình tập sự hành nghề luật sư trong thời gian tập sự cho Đoàn luật sư nơi đăng ký tập sự", "topic": "training"},
+{"id": 40, "q": "Khi hành nghề luật sư, để thực hiện các công việc cho khách hàng, luật sư có trách nhiệm:", "opts": {"a": "Luôn giữ thái độ lịch sự, tôn trọng đối với cơ quan Nhà nước, kiên quyết từ chối những hành vi móc nối, trung gian trái pháp luật, trái đạo đức và lương tâm nghề nghiệp.", "b": "Giải thích cho khách hàng các quy định pháp luật về khiếu nại, tố cáo nhằm khuyến nghị khách hàng tránh việc khiếu nại, tố cáo, gây tốn kém thời gian, tiền bạc của Nhà nước.", "c": "a và b đều đúng", "d": "a và b đều sai"}, "ans": "c", "exp": "Đáp án đúng là: c. a và b đều đúng", "topic": "client"},
+{"id": 41, "q": "Khi hành nghề, luật sư không được:", "opts": {"a": "Tiết lộ thông tin về vụ, việc, về khách hàng mà mình biết được trong khi hành nghề, trừ trường hợp được khách hàng đồng ý bằng văn bản hoặc pháp luật có quy định khác.", "b": "Sử dụng thông tin về vụ, việc, về khách hàng mà mình biết được trong khi hành nghề vào mục dích xâm phạm lợi ích của nhà nước, lợi ích công cộng, quyền, lợi ích hợp pháp của cơ quan, tổ chức, cá nhân.", "c": "Cả phương án a, b đều đúng.", "d": "Cả phương án a, b đều sai"}, "ans": "c", "exp": "Đáp án đúng là: c. Cả phương án a, b đều đúng.(K1, 2 Điều 25 LLS-VBHN 2015)", "topic": "license"},
+{"id": 42, "q": "Khi nhận hướng dẫn người tập sự hành nghề luật sư, tổ chức hành nghề luật sư có trách nhiệm:", "opts": {"a": "Phân công luật sư hướng dẫn người tập sự.", "b": "Lập sổ theo dõi quá trình tập sự của người tập sự tại tổ chức mình", "c": "Báo cáo bằng văn bản cho Sở Tư pháp, Đoàn luật sư nơi có trụ sở, Liên đoàn Luật sư Việt Nam về việc tập sự hành nghề luật sư của người tập sự tại tổ chức mình định kỳ hàng năm.", "d": "Cả 3 câu trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng", "topic": "training"},
+{"id": 43, "q": "Khi nhận và thực hiện vụ việc của khách hàng, Luật sư có quyền:", "opts": {"a": "Nhận vụ, việc vượt khả năng của mình và thực hiện vụ việc ngoài phạm vi yêu cầu của khách hàng miễn sao là bảo vệ tốt nhất quyền lợi của khách hàng", "b": "Chuyển giao vụ, việc mà mình đã nhận cho luật sư khác trong cùng 1 tổ chức hành nghề luật sư để làm", "c": "Chuyển giao vụ, việc mà mình đã nhận cho luật sư khác làm thay trong trường hợp bất khả kháng.", "d": "Cả 3 câu trên đều đúng"}, "ans": "c", "exp": "Đáp án đúng là: c. Chuyển giao vụ, việc mà mình đã nhận cho luật sư khác làm thay trong trường hợp bất khả kháng.", "topic": "client"},
+{"id": 44, "q": "Khi nhận và thực hiện vụ việc của khách hàng, Luật sư có trách nhiệm", "opts": {"a": "Không được tiết lộ thông tin về vụ việc mà mình biết được trong khi hành nghề nhưng có thể sử dụng thông tin vụ việc vào việc công tác giảng dạy", "b": "Luật sư có trách nhiệm bảo đảm các nhân viên của mình không tiết lộ thông tin về vụ, việc, về khách hàng của mình.", "c": "a và b đều đúng", "d": "a và b đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Luật sư có trách nhiệm bảo đảm các nhân viên của mình không tiết lộ thông tin về vụ, việc, về khách hàng của mình.", "topic": "client"},
+{"id": 45, "q": "Khi phát hiện tổ chức hành nghề luật sư không có đủ điều kiện hành nghề theo quy định của pháp luật, cơ quan nào có quyền yêu cầu tổ chức hành nghề luật sư tạm ngừng hoạt động:", "opts": {"a": "Ủy ban nhân dân cấp tỉnh, thành nơi tổ chức hành nghề luật sư đăng ký hoạt động.", "b": "Liên đoàn Luật sư Việt Nam", "c": "Sở Tư pháp nơi tổ chức hành nghề luật sư đăng ký hoạt động.", "d": "Ban Chủ nhiệm Đoàn Luật sư nơi tổ chức hành nghề luật sư đăng ký hoạt động."}, "ans": "c", "exp": "Đáp án đúng là: c. Sở Tư pháp nơi tổ chức hành nghề luật sư đăng ký hoạt động.", "topic": "license"},
+{"id": 46, "q": "Khi sử dụng dịch vụ pháp lý, khách hàng phải trả thù lao cho luật sư, dựa trên căn cứ:", "opts": {"a": "Nội dung, tính chất của dịch vụ pháp lý.", "b": "Thời gian và công sức của luật sư sử dụng để thực hiện dịch vụ pháp lý.", "c": "Kinh nghiệm và uy tín của luật sư.", "d": "Cả 3 câu đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng.", "topic": "fee"},
+{"id": 47, "q": "Khi tham gia tố tụng để bảo vệ quyền và lợi ích hợp pháp cho đương sự, luật sư có quyền:", "opts": {"a": "Thông đồng với luật sư của khách hàng có quyền lợi đối lập với khách hàng của mình để cùng mưu cầu lợi ích.", "b": "Tiếp xúc với luật sư của khách hàng có quyền lợi đối lập để thoả thuận phương thức giải quyết vụ án với sự tham gia của khách hàng mà luật sư bảo vệ.", "c": "Tiếp xúc với khách hàng có quyền lợi đối lập với khách hàng của mình để giải quyết vụ việc mà không thông báo cho luật sư đồng nghiệp bảo vệ quyền lợi cho khách hàng", "d": "a, b, c đều đúng"}, "ans": "b", "exp": "Đáp án đúng là: b. Tiếp xúc với luật sư của khách hàng có quyền lợi đối lập để thoả thuận phương thức giải quyết vụ án với sự tham gia của khách hàng mà luật sư bảo vệ", "topic": "court"},
+{"id": 48, "q": "Khi thực hiện trợ giúp pháp lý cho các khách hàng thuộc đối tượng được hưởng trợ giúp pháp lý, luật sư có được nhận tiền và lợi ích vật chất khác không?", "opts": {"a": "Nghiêm cấm.", "b": "Được nhận khi có thỏa thuận với khách hàng.", "c": "Được nhận thù lao theo quy định của pháp luật về chế độ công tác phí của cán bộ công chức.", "d": "Phương án b và c đúng."}, "ans": "a", "exp": "Đáp án đúng là: a. Nghiêm cấm.(điểm h, khoản 1, Điều 9 LLS-VBHN 2015)", "topic": "fee"},
+{"id": 49, "q": "Khi thực hiện vụ việc của khách hàng, Luật sư có trách nhiệm:", "opts": {"a": "Chủ động, tích cực giải quyết vụ việc của khách hàng và thông báo tiến trình giải quyết vụ việc để khách hàng biết.", "b": "Ký nhận và bảo quản, giữ gìn tài liệu, hồ sơ mà khách hàng giao cho mình.", "c": "Hoàn trả tài liệu, hồ sơ khi khách hàng yêu cầu hoặc khi đã giải quyết xong vụ việc và có thỏa thuận về việc trả lại, trừ trường hợp khách hàng chưa thanh toán hết thù lao, chi phí và việc giữ lại tài liệu, hồ sơ phù hợp với hợp đồng dịch vụ pháp lý đã ký kết.", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "client"},
+{"id": 50, "q": "Khi tiếp xúc với khách hàng, Luật sư có quyền từ chối nhận vụ việc của khách hàng trong trường hợp:", "opts": {"a": "Khách hàng có thái độ không tôn trọng luật sư và không thay đổi thái độ này", "b": "Khách hàng không tự nguyện khi yêu cầu luật sư mà bị phụ thuộc theo yêu cầu không chính đáng của người khác.", "c": "Có căn cứ rõ ràng xác định yêu cầu của khách hàng không có cơ sở hoặc trái đạo đức.", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "client"},
+{"id": 51, "q": "Khi tiếp xúc với khách hàng, Luật sư có quyền từ chối nhận vụ việc của khách hàng trong trường hợp:", "opts": {"a": "Khách hàng yêu cầu dịch vụ pháp lý của luật sư với ý định lợi dụng dịch vụ đó cho mục đích khác.", "b": "Có dấu hiệu cho thấy khách hàng đã cung cấp chứng cứ giả.", "c": "Khách hàng thông qua người khác yêu cầu luật sư", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "client"},
+{"id": 52, "q": "Kể từ ngày Chi nhánh của tổ chức hành nghề luật sư được cấp Giấy đăng ký hoạt động của chi nhánh, tổ chức hành nghề luật sư phải thông báo bằng văn bản cho Sở Tư pháp, Đoàn luật sư ở địa phương nơi tổ chức hành nghề luật sư đăng ký hoạt động và Đoàn luật sư ở địa phương nơi có trụ sở của chi nhánh trong thời hạn:", "opts": {"a": "7 ngày làm việc", "b": "15 ngày làm việc", "c": "25 ngày làm việc", "d": "30 ngày làm việc"}, "ans": "a", "exp": "Đáp án đúng là: a. 7 ngày làm việc", "topic": "organization"},
+{"id": 53, "q": "Kể từ ngày thay đổi hoặc kể từ ngày nhận được Giấy đăng ký hoạt động cấp lại, tổ chức hành nghề luật sư phải thông báo bằng văn bản cho Đoàn luật sư về việc thay đổi trong thời hạn:", "opts": {"a": "5 ngày làm việc", "b": "7 ngày làm việc", "c": "10 ngày làm việc", "d": "15 ngày làm việc"}, "ans": "c", "exp": "Đáp án đúng là: c. 10 ngày làm việc", "topic": "organization"},
+{"id": 54, "q": "Kể từ ngày thành lập Văn phòng giao dịch, tổ chức hành nghề luật sư phải thông báo bằng văn bản về địa chỉ của văn phòng giao dịch cho Sở Tư pháp, Đoàn luật sư ở địa phương nơi đăng ký hoạt động trong thời hạn:", "opts": {"a": "3 ngày làm việc", "b": "5 ngày làm việc", "c": "7 ngày làm việc", "d": "10 ngày làm việc"}, "ans": "b", "exp": "Đáp án đúng là: b. 5 ngày làm việc", "topic": "organization"},
+{"id": 55, "q": "Kể từ ngày được cấp Giấy đăng ký hoạt động, tổ chức hành nghề luật sư phải đăng báo hằng ngày của trung ương hoặc địa phương nơi đăng ký hoạt động hoặc báo chuyên ngành luật trong ba số liên tiếp về nội dung đăng ký hoạt động của tổ chức hành nghề luật sư, trong thời hạn:", "opts": {"a": "10 ngày", "b": "15 ngày", "c": "20 ngày", "d": "30 ngày"}, "ans": "d", "exp": "Đáp án đúng là: d. 30 ngày", "topic": "license"},
+{"id": 56, "q": "Kể từ ngày được cấp Giấy đăng ký hành nghề luật sư, luật sư hành nghề với tư cách cá nhân phải gửi thông báo bằng văn bản kèm theo bản sao Giấy đăng ký hành nghề luật sư cho Đoàn luật sư mà mình là thành viên trong thời hạn", "opts": {"a": "5 ngày làm việc", "b": "7 ngày làm việc", "c": "10 ngày làm việc", "d": "15 ngày làm việc"}, "ans": "b", "exp": "Đáp án đúng là: b. 7 ngày làm việc", "topic": "organization"},
+{"id": 57, "q": "Kể từ ngày được cấp lại Giấy đăng ký hoạt động, Trưởng văn phòng luật sư hoặc Giám đốc công ty luật phải thông báo bằng văn bản kèm theo bản sao Giấy đăng ký hoạt động cho Đoàn luật sư mà mình là thành viên trong thời hạn:", "opts": {"a": "5 ngày làm việc", "b": "7 ngày làm việc", "c": "10 ngày làm việc", "d": "15 ngày làm việc"}, "ans": "c", "exp": "Đáp án đúng là: c. 10 ngày làm việc", "topic": "organization"},
+{"id": 58, "q": "Luật luật sư (đã được sửa đổi, bổ sung 2012) quy định Luật sư không có quyền:", "opts": {"a": "Nhận bất kỳ một khoản tiền, lợi ích khi thực hiện trợ giúp pháp lý cho đối tượng được hưởng trợ giúp pháp lý theo quy định của pháp luật.", "b": "Tự mình thực hiện một số hành vi để trì hoãn, kéo dài thời gian giải quyết vụ án nhằm bảo vệ quyền và lợi ích hợp pháp của khách hàng khi cần thiết.", "c": "Có thể dùng thủ thuật như sử dụng lời lẽ, hành vi xúc phạm hoặc kích động cá nhân, cơ quan, tổ chức trong quá trình tham gia tố tụng nhằm bảo vệ quyền, lợi ích của khách hàng.", "d": "a, b, c đều sai"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều sai", "topic": "general"},
+{"id": 59, "q": "Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012) quy định Luật sư chỉ bị từ chối cấp Giấy chứng nhận người bào chữa khi thuộc một trong các trường hợp sau đây:", "opts": {"a": "Người bị tạm giữ, bị can, bị cáo từ chối luật sư.", "b": "Luật sư là người thân thích của người đã hoặc đang tiến hành tố tụng trong vụ án đó.", "c": "Luật sư đã tham gia trong vụ án đó với tư cách là người làm chứng, người giám định hoặc người phiên dịch.", "d": "Cả 3 câu trên đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng.", "topic": "court"},
+{"id": 60, "q": "Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012) quy định Luật sư muốn hướng dẫn người tập sự hành nghề luật sư phải đáp ứng tiêu chuẩn nào:", "opts": {"a": "Có ít nhất ba năm kinh nghiệm hành nghề luật sư", "b": "Không thuộc trường hợp đang trong thời gian bị xử lý kỷ luật theo quy định Luật Luật sư", "c": "a và b đều đúng", "d": "a và b đều sai"}, "ans": "c", "exp": "Đáp án đúng là: c. a và b đều đúng", "topic": "training"},
+{"id": 61, "q": "Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012) quy định muốn thành lập tổ chức hành nghề luật sư, luật sư phải có thời gian làm việc theo hợp đồng lao động cho tổ chức hành nghề luật sư ít nhất là:", "opts": {"a": "Hai năm", "b": "Hai năm liên tục", "c": "Ba năm", "d": "Ba năm liên tục"}, "ans": "a", "exp": "Đáp án đúng là: a. Hai năm", "topic": "license"},
+{"id": 62, "q": "Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012) quy định thời gian đào tạo nghề luật sư là:", "opts": {"a": "06 tháng", "b": "0 9 thgáng", "c": "12 tháng", "d": "Cả 3 câu trên đều sai"}, "ans": "c", "exp": "Đáp án đúng là: c. 12 tháng", "topic": "general"},
+{"id": 63, "q": "Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012) quy định tổ chức hành nghề luật sư nước ngoài được hành nghề tại Việt Nam dưới hình thức:", "opts": {"a": "Chi nhánh của tổ chức hành nghề luật sư nước ngoài", "b": "Công ty luật trách nhiệm hữu hạn một trăm phần trăm vốn nước ngoài", "c": "Công ty luật trách nhiệm hữu hạn dưới hình thức liên doanh, công ty luật hợp danh giữa tổ chức hành nghề luật sư nước ngoài và công ty luật hợp danh Việt", "d": "Cả 3 câu trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng", "topic": "license"},
+{"id": 64, "q": "Luật Luật sư năm 2006 quy định thời gian đào tạo nghề luật sư là:", "opts": {"a": "6 tháng", "b": "9 tháng", "c": "12 tháng", "d": "Cả 3 câu trên đều sai"}, "ans": "a", "exp": "Đáp án đúng là: a. 6 tháng", "topic": "general"},
+{"id": 65, "q": "Luật sư có các nghĩa vụ sau đây:", "opts": {"a": "Tham gia bồi dưỡng bắt buộc về chuyên môn, nghiệp vụ.", "b": "Tham gia tố tụng đầy đủ, kịp thời trong các vụ án do cơ quan tiến hành tố tụng yêu cầu.", "c": "Thực hiện trợ giúp pháp lý.", "d": "Cả 3 phương án trên."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 phương án trên.(Khoản 2, điều 21 LLS-VBHN 2015).", "topic": "general"},
+{"id": 66, "q": "Luật sư có nghĩa vụ thực hiện trợ giúp pháp lý:", "opts": {"a": "Đúng", "b": "Sai"}, "ans": "a", "exp": "Đáp án đúng là: a. Đúng", "topic": "general"},
+{"id": 67, "q": "Luật sư hành nghề theo nguyên tắc:", "opts": {"a": "Chỉ tuân thủ Hiến pháp và pháp luật khi bảo vệ quyền, lợi ích của khách hàng.", "b": "Sử dụng mọi biện pháp để bảo vệ tốt nhất quyền, lợi ích của khách hàng.", "c": "Độc lập, trung thực và luôn tôn trọng sự thật khách quan khi bảo vệ quyền, lợi ích của khách hàng", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "license"},
+{"id": 68, "q": "Luật sư hành nghề với tư cách cá nhân là luật sư làm việc:", "opts": {"a": "Theo hợp đồng lao động cho cơ quan, tổ chức là tổ chức hành nghề luật sư", "b": "Theo hợp đồng lao động cho cơ quan tổ chức không phải là tổ chức hành nghề luật sử", "c": "Không ký hợp đồng hoặc không thành lập, tham gia thành lập bất kỳ tổ chức hành nghề luật sư nào", "d": "Tại nhà riêng, không làm cho bất kỳ cơ quan, tổ chức nào"}, "ans": "b", "exp": "Đáp án đúng là: b) Theo hợp đồng lao động cho cơ quan tổ chức không phải là tổ chức hành nghề luật sử", "topic": "license"},
+{"id": 69, "q": "Luật sư hành nghề với tư cách cá nhân có thể đăng ký hoạt động với:", "opts": {"a": "Liên đoàn luật sư hoặc đoàn luật sư nơi luật sư là thành viên.", "b": "Sở tư pháp địa phương nơi có đoàn luật sư mà luật sư là thành viên.", "c": "Ủy ban nhân dân tỉnh, thành phố phố nơi luật sư có bộ khẩu thường trú.", "d": "Cả 3 phương án trên đều sai."}, "ans": "b", "exp": "Đáp án đúng là: b. Sở tư pháp địa phương nơi có đoàn luật sư mà luật sư là thành viên.(Khoản 1 Điều 50 LLS 2012-VBHN 2015)", "topic": "license"},
+{"id": 70, "q": "Luật sư hành nghề với tư cách cá nhân là luật sư làm việc:", "opts": {"a": "Theo hợp đồng cung cấp dịch vụ pháp lý cho cá nhân, cơ quan, tổ chức.", "b": "Theo hợp đồng lao động cho cơ quan, tổ chức không phải là tổ chức hành nghề luật sư.", "c": "Không ký hợp đồng hoặc không thành lập, tham gia thành lập bất kỳ tổ chức hành nghề luật sư nào.", "d": "Tại nhà riêng, không làm cho bất kỳ cơ quan, tổ chức nào."}, "ans": "b", "exp": "Đáp án đúng là: b. Theo hợp đồng lao động cho cơ quan, tổ chức không phải là tổ chức hành nghề luật sư.(Khoản 1 Điều 49 LLS-VBHN 2015)", "topic": "license"},
+{"id": 71, "q": "Luật sư hành nghề với tư cách cá nhân là luật sư làm việc:", "opts": {"a": "Theo hợp đồng lao động cho cơ quan, tổ chức là tổ chức hành nghề luật sư.", "b": "Theo hợp đồng lao động cho cơ quan, tổ chức không phải là tổ chức hành nghề luật sư.", "c": "Không ký hợp đồng hoặc không thành lập, tham gia thành lập bất kỳ tổ chức hành nghề luật sư nào.", "d": "Tại nhà riêng, không làm cho bất kỳ cơ quan, tổ chức nào."}, "ans": "b", "exp": "Đáp án đúng là: b. Theo hợp đồng lao động cho cơ quan, tổ chức không phải là tổ chức hành nghề luật sư.(Khoản 1, điều 49 VBHN LLS 2015)", "topic": "license"},
+{"id": 72, "q": "Luật sư hành nghề với tư cách cá nhân phải đăng ký hàng nghề tại Đoàn luật sư.", "opts": {"a": "Đúng", "b": "Sai"}, "ans": "b", "exp": "Đáp án đúng là: b.  Sai", "topic": "organization"},
+{"id": 73, "q": "Luật sư hành nghề với tư cách cá nhân phải đăng ký hành nghề luật sư tại:", "opts": {"a": "Liên đoàn Luật sư Việt Nam", "b": "Ủy ban nhân dân cấp tỉnh, thành", "c": "Sở Tư pháp ở địa phương nơi có Đoàn luật sư mà luật sư đó là thành viên.", "d": "Đoàn luật sư mà luật sư đó là thành viên."}, "ans": "c", "exp": "Đáp án đúng là: c. Sở Tư pháp ở địa phương nơi có Đoàn luật sư mà luật sư đó là thành viên.", "topic": "license"},
+{"id": 74, "q": "Luật sư hướng dẫn tập sự hành nghề luật sư phải đáp ứng các điều kiện nào sau đây?", "opts": {"a": "Đang hành nghề trong một tổ chức hành nghề luật sư.", "b": "Có ít nhất 03 năm kinh nghiệm hành nghề luật sư, có uy tín, trách nhiệm trong việc hướng dẫn tập sự hành nghề luật sư.", "c": "Không trong thời gian bị áp dụng các hình thúc xử lý kỷ luật theo quy định của Điều lệ của Liên đoàn luật sư Việt Nam.", "d": "Cả 3 phương án trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 phương án trên đều đúng(Khoản 1 Điều 8 Thông tư 10/2021/TT-BTP)", "topic": "training"},
+{"id": 75, "q": "Luật sư không có nghĩa vụ tham gia bồi dưỡng bắt buộc về nghiệp vụ.", "opts": {"a": "Đúng", "b": "Sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Sai", "topic": "general"},
+{"id": 76, "q": "Luật sư không được thực hiện hành vi nào dưới đây:", "opts": {"a": "Sách nhiễu, lừa dối khách hàng.", "b": "Nhận, đòi hỏi bất kỳ một khoản tiền, lợi ích nào khác từ khách hàng ngoài khoản thù lao và chi phí đã thoả thuận với khách hàng trong hợp đồng dịch vụ pháp lý.", "c": "Móc nối, quan hệ với người tiến hành tố tụng, người tham gia tố tụng, cán bộ, công chức khác để làm trái quy định của pháp luật trong việc giải quyết vụ, việc.", "d": "Cả ba phương án trên."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả ba phương án trên.(Điều 9 VBHN LLS 2015)", "topic": "general"},
+{"id": 77, "q": "Luật sư thành lập hoặc tham gia thành lập tổ chức hành nghề luật sư phải có:", "opts": {"a": "Ít nhất 02 năm hành nghề liên tục", "b": "Ít nhất 03 năm hành nghề liên tục", "c": "03 năm hành nghề kể từ ngày được cấp thẻ luật sư", "d": "Ít nhất 03 năm hành nghề liên tục hoặc 05 năm hành nghề kể từ ngày được cấp thẻ luật sư"}, "ans": "a", "exp": "Đáp án đúng là: a) Ít nhất 02 năm hành nghề liên tục", "topic": "license"},
+{"id": 78, "q": "Luật sư từ chối tiếp nhận vụ việc của khách hàng trong trường hợp nào?", "opts": {"a": "Có căn cứ rõ ràng xác định khách hàng đã cung cấp chứng cứ giả hoặc yêu cầu của khách hàng không có cơ sở, trái đạo đức, trái pháp luật.", "b": "Khách hàng có thái độ không tôn trọng luật sư và nghề luật sư và không thay đổi thái độ này.", "c": "Luật sư không đủ khả năng chuyên môn hoặc điều kiện thực tế để thực hiện vụ việc", "d": "Cả 3 đáp án trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 đáp án trên đều đúng(Quy tắc 11)", "topic": "client"},
+{"id": 79, "q": "Luật sư được sửa đổi bổ sung năm nào?", "opts": {"a": "2010", "b": "2011", "c": "2012", "d": "cả 3 phương án trên đều sai."}, "ans": "c", "exp": "Đáp án đúng là: c. 2012", "topic": "general"},
+{"id": 80, "q": "Mỗi luật sư hướng dẫn chỉ được hướng dẫn không quá ba người tập sự tại cùng một thời điểm.", "opts": {"a": "Đúng", "b": "Sai"}, "ans": "a", "exp": "Đáp án đúng là: a. Đúng", "topic": "training"},
+{"id": 81, "q": "Mỗi luật sư hướng dẫn chỉ được hướng dẫn:", "opts": {"a": "Không quá ba người.", "b": "Không quá năm người.", "c": "Không quá hai người.", "d": "Tất cả phương án trên đều sai."}, "ans": "a", "exp": "Đáp án đúng là: a. Không quá ba người.(Khoản 1, Điều 14 LLS-VBHN 2015)", "topic": "general"},
+{"id": 82, "q": "Một trong những nghĩa vụ của luật sư là", "opts": {"a": "Không được từ chối các hợp đồng dịch vụ pháp lý đối với người nghèo và phải tham gia các khóa học do Đoàn luật sư tổ chức.", "b": "Cung cấp các dịch vụ pháp lý cho người nghèo và tham gia các hội thảo, hội nghị góp ý các dự án luật.", "c": "Hỗ trợ pháp lý miễn phí cho người nghèo và học tập nâng cao kiến thức chuyên môn, kỹ năng hành nghề theo quy định của Luật Luật sư.", "d": "Trợ giúp pháp lý và tham gia bồi dưỡng bắt buộc về chuyên môn, nghiệp vụ theo quy định của Luật Luật sư."}, "ans": "d", "exp": "Đáp án đúng là: d. Trợ giúp pháp lý và tham gia bồi dưỡng bắt buộc về chuyên môn, nghiệp vụ theo quy định của Luật Luật sư.(Khoản 2, Điều 21 LLS-VBHN 2015)", "topic": "general"},
+{"id": 83, "q": "Mức thù lao luật sư tham gia tố tụng trong vụ án hình sự theo yêu cầu của khách hàng được tính như thế nào?", "opts": {"a": "Tính theo số ngày tham gia tố tụng.", "b": "Tính theo số ngày tham gia vụ án.", "c": "Tính theo tính chất phức tạp của vụ án.", "d": "Tính theo giờ hoặc tính trọn gói theo vụ việc nhưng mức cao nhất cho một giờ làm việc của luật sư không được vượt quá 0.3 lần mức lương cơ sở do Chính phủ quy định."}, "ans": "d", "exp": "Đáp án đúng là: d. Tính theo giờ hoặc tính trọn gói theo vụ việc nhưng mức cao nhất cho một giờ làm việc của luật sư không được vượt quá 0.3 lần mức lương cơ sở do Chính phủ quy định.(Khoản 1 Điều 18 Nghị định 123)", "topic": "fee"},
+{"id": 84, "q": "Mức thù lao luật sư tham gia tố tụng trong vụ án hình sự được tính theo tính chất phức tạp của vụ án.", "opts": {"a": "Đúng", "b": "Sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Sai", "topic": "fee"},
+{"id": 85, "q": "Mức thù lao luật sư tham gia tố tụng trong vụ án hình sự do khách hàng và tổ chức hành nghề luật sư thỏa thuận, được tính theo giờ hoặc tính trọn gói theo vụ việc, nhưng mức cao nhất quy ra giờ không được vượt quá:", "opts": {"a": "100.000 đồng/ 1 giờ làm việc", "b": "120.000 đồng/ 1 giờ làm việc", "c": "150.000 đồng/ 1 giờ làm việc", "d": "200.000 đồng/ 1 giờ làm việc 447.000 VNĐ/Giờ. 0.3 nhân với mức lương cơ sở (không có trong tùy chọn)"}, "ans": "d", "exp": "Đáp án đúng là: 447.000 VNĐ/Giờ. 0.3 nhân với mức lương cơ sở", "topic": "fee"},
+{"id": 86, "q": "Nghề của luật sư để thực hiện bằng hình thức:", "opts": {"a": "Thành lập hoặc tham gia thành lập tổ chức hành nghề luật sư, làm việc theo hợp đồng lao động của tổ chức hành nghề luật sư hoặc hành nghề với tư cách cá nhân", "b": "Liên doanh thành lập tổ chức hành nghề luật sư.", "c": "Đăng ký với đoàn luật sư và nhận vụ việc từ luật sư.", "d": "Cả ba phương án trên đều sai."}, "ans": "a", "exp": "Đáp án đúng là: a. Thành lập hoặc tham gia thành lập tổ chức hành nghề luật sư, làm việc theo hợp đồng lao động của tổ chức hành nghề luật sư hoặc hành nghề với tư cách cá nhân(Khoản 1, điều 23 LLS-VBHN 2015).", "topic": "general"},
+{"id": 87, "q": "Nguyên tắc hành nghề luật sư là:", "opts": {"a": "Tuân thủ hiến pháp và pháp luật, tuân theo Quy tắc đạo đức và ứng xử nghề nghiệp luật sư, độc lập, trung thực, tôn trọng sự thật khách quan.", "b": "Sử dụng các biện pháp hợp pháp để bảo vệ tốt nhất quyền, lợi ích hợp pháp của khách hàng.", "c": "Chịu trách nhiệm trước pháp luật về hoạt động nghề nghiệp luật sư.", "d": "Cả ba phương án trên."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả ba phương án trên.", "topic": "license"},
+{"id": 88, "q": "Nguyên tắc quản lý luật sư và hành nghề luật sư bao gồm:", "opts": {"a": "Tự quản của tổ chức hành nghề luật sư, đoàn luật sư.", "b": "Tự quản của đoàn luật sư theo sự quản lý thống nhất của Liên đoàn luật sư.", "c": "Quản lý nhà nước của Bộ Tư pháp.", "d": "Kết hợp quản lý nhà nước với chế độ tự quản của các tổ chức xã hội nghề nghiệp nghề nghiệp luật sư, tổ chức hành nghề luật sư"}, "ans": "d", "exp": "Đáp án đúng là: d. Kết hợp quản lý nhà nước với chế độ tự quản của các tổ chức xã hội nghề nghiệp nghề nghiệp luật sư, tổ chức hành nghề luật sư(Khoản 1, điều 6 LLS-VBHN 2015).", "topic": "license"},
+{"id": 89, "q": "Người bị thu hồi Chứng chỉ hành nghề luật sư do đã bị kết án, dù đã được xóa án tích, thì không được cấp lại Chứng chỉ hành nghề luật sư nếu đã bị kết án về:", "opts": {"a": "Tội phạm nghiêm trọng do cố ý.", "b": "Tội phạm rất nghiêm trọng do cố ý", "c": "Tội phạm đặc biệt nghiêm trọng do cố ý", "d": "Cả 3 câu trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng", "topic": "license"},
+{"id": 90, "q": "Người có chứng chỉ hành nghề luật sư có thể bị Ban Chủ nhiệm Đoàn Luật sư từ chối việc gia nhập Đoàn Luật sư trong trường hợp:", "opts": {"a": "Không còn cư ngụ tại Việt Nam", "b": "Đã bị kết án về 1 tội phạm do vô ý dù đã được xóa án tích", "c": "Đã bị thi hành kỷ luật bằng hình thức xoá tên khỏi danh sách luật sư của Đoàn luật sư mà chưa hết thời hạn ba năm, kể từ ngày quyết định thi hành kỷ luật có hiệu lực.", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "organization"},
+{"id": 91, "q": "Người có Giấy chứng nhận tốt nghiệp đào tạo nghề luật sư nhưng không được đăng ký tập sự hành nghề luật sư trong trường hợp:", "opts": {"a": "Không còn cư ngụ tại Việt Nam", "b": "Đã bị kết án mà chưa được xóa án tích về tội phạm do vô ý.", "c": "Cán bộ, công chức đã bị buộc thôi việc mà chưa hết thời hạn ba năm, kể từ ngày quyết định buộc thôi việc có hiệu lực", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "training"},
+{"id": 92, "q": "Người có thẩm quyền thu hồi Chứng chỉ hành nghề luật sư là:", "opts": {"a": "Bộ trưởng Bộ Tư pháp", "b": "Chủ tịch Liên đoàn luật sư Việt Nam", "c": "Chủ nhiệm Đoàn Luật sư", "d": "Cả 3 câu trên đều sai"}, "ans": "a", "exp": "Đáp án đúng là: a. Bộ trưởng Bộ Tư pháp", "topic": "license"},
+{"id": 93, "q": "Người muốn tập sự hành nghề luật sư có thể đề nghị Ban chủ nhiệm Đoàn luật sư giới thiệu tổ chức hành nghề luật sư để tập sự trong trường hợp nào", "opts": {"a": "Không thỏa thuận được với tổ chức hành nghề luật sư về thu nhập, thù lao trong quá trình tập sự hành nghề luật sư", "b": "Không thỏa thuận được với tổ chức hành nghề luật sư về việc nhận tập sự", "c": "Không thỏa thuận được với một luật sư chính thức về việc nhập tập sự", "d": "Không có khả năng tài chính để đóng góp cho tổ chức hành nghề luật sư"}, "ans": "b", "exp": "Đáp án đúng là: b) Không thỏa thuận được với tổ chức hành nghề luật sư về việc nhận tập sự", "topic": "training"},
+{"id": 94, "q": "Người muốn tập sự hành nghề luật sư cần làm gì để tập sự hành nghề luật sư?", "opts": {"a": "Lựa chọn và thỏa thuận với một tổ chức hành nghề luật sư để tập sự hành nghề luật sư.", "b": "Lựa chọn và thỏa thuận với một luật sư chính thức để tập sự hành nghề luật sư.", "c": "Làm việc cho một tổ chức hành nghề luật sư để tập sự hành nghề luật sư.", "d": "Giúp việc cho một luật sư chính thức để tập sự hành nghề luật sư."}, "ans": "a", "exp": "Đáp án đúng là: a. Lựa chọn và thỏa thuận với một tổ chức hành nghề luật sư để tập sự hành nghề luật sư.(Khoản 1 Điều 4 Thông tư 10/2021/TT-BTP)", "topic": "training"},
+{"id": 95, "q": "Người nào dưới đây được miễn thời gian tập sự hành nghề luật sư:", "opts": {"a": "Thẩm tra viên chính ngành Tòa án.", "b": "Kiểm tra viên ngành Kiểm sát từ mười năm trở lên.", "c": "Giảng viên chính trong lĩnh vực pháp luật.", "d": "Điều tra viên trung cấp."}, "ans": "d", "exp": "Đáp án đúng là: d. Điều tra viên trung cấp.(Khoản 1, điều 16 VBHN LLS 2015)", "topic": "training"},
+{"id": 96, "q": "Người tập sự hành nghề luật sư:", "opts": {"a": "Được đại diện, bào chữa, bảo vệ quyền và lợi ích hợp pháp cho khách hàng tại phiên tòa", "b": "Không được đại diện, bảo chữa, bảo vệ quyền và lợi ích hợp pháp cho khách hàng tai phien tòa", "c": "Được đại diện, bào chữa, bảo vệ quyền và lợi ích hợp pháp cho khách hàng tại phiên tòa nếu được khách hàng đồng ý bằng văn bản", "d": "Được đại diện, bảo chữa bảo vệ quyền và lợi ích hợp pháp cho khách hàng tại phiên tòa nếu được khách hàng đồng ý bằng văn bản và được tòa án cho phép"}, "ans": "b", "exp": "Đáp án đúng là: b) Không được đại diện, bảo chữa, bảo vệ quyền và lợi ích hợp pháp cho khách hàng tại phiên tòa", "topic": "training"},
+{"id": 97, "q": "Người tập sự chấm dứt việc tập sự hành nghề luật sư trong trường hợp:", "opts": {"a": "Không còn thường trú tại Việt", "b": "Bị áp dụng biện pháp xử lý hành chính đưa vào cơ sở chữa bệnh, cơ sở giáo dục hoặc quản chế hành chính.", "c": "Bị xử lý kỷ luật bằng hình thức xoá tên khỏi danh sách người tập sự của Đoàn luật sư.", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "training"},
+{"id": 98, "q": "Người tập sự có thể tạm ngừng việc tập sự hành nghề luật sư nhưng thời gian tạm ngừng việc tập sự hành nghề luật sư không quá:", "opts": {"a": "02 tháng", "b": "03 tháng", "c": "04 tháng", "d": "05 tháng"}, "ans": "b", "exp": "Đáp án đúng là: b. 03 tháng", "topic": "training"},
+{"id": 99, "q": "Người tập sự hành nghề luật sư có thể tập sự hành nghề luật sư tại:", "opts": {"a": "Văn phòng luật sư, Công ty Luật.", "b": "Văn phòng luật sư, công ty luật; chi nhánh của văn phòng luật sư, công ty luật.", "c": "Văn phòng luật sư, công ty luật; chi nhánh, văn phòng giao dịch của văn phòng luật sư, công ty luật;", "d": "Văn phòng luật sư, công ty luật; chi nhánh của văn phòng luật sư, công ty luật; chi nhánh của tổ chức hành nghề luật sư nước ngoài tại Việt Nam; công ty luật nước ngoài tại VN"}, "ans": "d", "exp": "Đáp án đúng là: d. Văn phòng luật sư, công ty luật; chi nhánh của văn phòng luật sư, công ty luật; chi nhánh của tổ chức hành nghề luật sư nước ngoài tại Việt Nam; công ty luật nước ngoài tại VN", "topic": "training"},
+{"id": 100, "q": "Người tập sự hành nghề luật sư khi không đạt yêu cầu tập sự theo đánh giá của luật sư hướng dẫn và tổ chức hành nghề luật sư nhận tập sự, được gia hạn tập sự tối đa bao nhiêu lần:", "opts": {"a": "01 lần.", "b": "02 lần.", "c": "03 lần.", "d": "04 lần."}, "ans": "b", "exp": "Đáp án đúng là: b. 02 lần.", "topic": "training"},
+{"id": 101, "q": "Người tập sự hành nghề luật sư phải đóng phí tập sự hành nghề luật sư theo khung phí do cơ quan nào quy định?", "opts": {"a": "Đoàn Luật sư nơi người tập sự hành nghề luật sư gia nhập", "b": "Liên đoàn Luật sư Việt Nam", "c": "Bộ Tư pháp", "d": "Tự thỏa thuận với tổ chức hành nghề luật sư nơi tập sự."}, "ans": "b", "exp": "Đáp án đúng là: b. Liên đoàn Luật sư Việt Nam", "topic": "training"},
+{"id": 102, "q": "Người tập sự hành nghề luật sư phải đảm bảo thời gian tập sự tối thiểu là :", "opts": {"a": "15 giờ trong 01 tuần.", "b": "20 giờ trong 01 tuần.", "c": "25 giờ trong 01 tuần.", "d": "30 giờ trong 01 tuần."}, "ans": "b", "exp": "Đáp án đúng là: b. 20 giờ trong 01 tuần.", "topic": "training"},
+{"id": 103, "q": "Người tập sự hành nghề luật sư tập sự tại một tổ chức hành nghề luật sư có thời gian tập sự từ một tháng đến dưới 4 tháng thì chỉ được tính thời gian này vào tổng thời  gian tập sự trong trường hợp:", "opts": {"a": "Tổ chức hành nghề luật sư nhận tập sự tạm ngừng hoạt động hoặc chấm dứt hoạt động theo quy định của Luật Luật sư.", "b": "Người tập sự thay đổi nơi cư trú.", "c": "Luật sư hướng dẫn chết hoặc vì lý do sức khoẻ hoặc lý do khách quan khác mà không thể tiếp tục hướng dẫn tập sự hành nghề luật sư.", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "training"},
+{"id": 104, "q": "Người tập sự hành nghề luật sư vi phạm Quy chế tập sự hành nghề luật sư có thể bị áp dụng hình thức kỷ luật:", "opts": {"a": "Khiển trách", "b": "Tạm đình chỉ việc tập sự hành nghề luật sư từ sáu tháng đến mười hai tháng;", "c": "Xoá tên khỏi danh sách người tập sự của Đoàn luật sư.", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "training"},
+{"id": 105, "q": "Người tập sự hành nghề luật sư đi cùng với luật sư hướng dẫn trong các vụ việc dân sự, vụ án hành chính khi đủ điều kiện", "opts": {"a": "Giấy giới thiệu của tổ chức hành nghề luật sư.", "b": "Được luật sư hướng dẫn bảo lãnh.", "c": "Giấy chứng nhận người tập sự hành nghề luật sư và giấy tờ xác nhận có sự đồng ý của khách hàng.", "d": "Cả ba phương án trên đều đúng."}, "ans": "c", "exp": "Đáp án đúng là: c. Giấy chứng nhận người tập sự hành nghề luật sư và giấy tờ xác nhận có sự đồng ý của khách hàng.(Khoản 2, Điều 27 LLS –VBHN 2015)", "topic": "training"},
+{"id": 106, "q": "Người tập sự hành nghề luật sư được liên hệ với cá nhân, cơ quan, tổ chức để:", "opts": {"a": "Thực hiện việc bào chữa, đại diện, bảo vệ quyền, lợi ích hợp pháp của khách hàng", "b": "Thực hiện các hoạt động có liên quan đến việc bào chữa, đại diện, bảo vệ quyền, lợi ích hợp pháp của khách hàng", "c": "Tham gia tố tụng, đại diện ngoài tố tụng, tư vấn pháp luật và thực hiện dịch vụ pháp lý khách một cách tốt nhất nhằm bảo vệ quyền, lợi ích hợp pháp của khách hàng", "d": "Đại diện cho luật sư hướng dẫn tập sự cung cấp thông tin pháp lý và ký hợp đồng dịch vụ pháp lý với khách hàng"}, "ans": "b", "exp": "Đáp án đúng là: b) Thực hiện các hoạt động có liên quan đến việc bào chữa, đại diện, bảo vệ quyền, lợi ích hợp pháp của khách hàng", "topic": "training"},
+{"id": 107, "q": "Người tập sự được Ban Chủ nhiệm Đoàn luật sư gia hạn tập sự hành nghề luật sư theo đề nghị của tổ chức hành nghề luật sư nhưng số lần gia hạn tối đa là:", "opts": {"a": "01 lần", "b": "02 lần (mỗi lần 06 tháng)", "c": "03 lần", "d": "Không giới hạn số lần gia hạn"}, "ans": "b", "exp": "Đáp án đúng là: b. 02 lần (mỗi lần 06 tháng)", "topic": "training"},
+{"id": 108, "q": "Nhằm nâng cao hiệu quả hoạt động và doanh thu, thu hút khách hàng, trong quá trình hoạt động, luật sư có quyền:", "opts": {"a": "Sử dụng mối quan hệ phụ thuộc với đồng nghiệp như quan hệ thầy – trò, huyết thống, thân thuộc, cấp trên – cấp dưới để chi phối kết quả giải quyết vụ việc của đồng nghiệp", "b": "Giới thiệu số lượng luật sư, số lượng vụ việc của tổ chức hành nghề luật sư của mình để khách hàng có thêm thông tin, lựa chọn luật sư.", "c": "Sử dụng các nhân viên của mình làm người tiếp thị trước trụ sở các cơ quan tiến hành tố tụng, trại tạm giam, cơ quan nhà nước và các tổ chức khác để giới thiệu tổ chức hành nghề luật sư của mình.", "d": "a, b, c đều đúng"}, "ans": "b", "exp": "Đáp án đúng là: b. Giới thiệu số lượng luật sư, số lượng vụ việc của tổ chức hành nghề luật sư của mình để khách hàng có thêm thông tin, lựa chọn luật sư.", "topic": "client"},
+{"id": 109, "q": "Quy tắc đạo đức và ứng xử nghề nghiệp luật sư được ban hành do", "opts": {"a": "Liên đoàn luật sư Việt Nam", "b": "Liên đoàn luật sư Việt Nam báo cáo và sự đồng ý của Cục bổ trợ Bộ tư pháp.", "c": "Liên đoàn luật sư Việt Nam đề xuất và sự chấp thuận của Bộ trưởng Bộ tư pháp.", "d": "Cả ba trường hợp trên đều đúng."}, "ans": "a", "exp": "Đáp án đúng là: a.Liên đoàn luật sư Việt Nam (Khoản 3, điều 65 LLS-VBHN 2015).", "topic": "ethics"},
+{"id": 110, "q": "Quy tắc đạo đức và ứng xử nghề nghiệp luật sư do cơ quan nào ban hành:", "opts": {"a": "Bộ Tư pháp", "b": "Hội đồng luật sư toàn quốc", "c": "Ban Thường vụ Liên đoàn luật sư Việt Nam", "d": "Đại hội đại biểu luật sư toàn quốc"}, "ans": "b", "exp": "Đáp án đúng là: b. Hội đồng luật sư toàn quốc", "topic": "ethics"},
+{"id": 111, "q": "Sở tư pháp tỉnh, thành phố trực thuộc trung ương là cơ quan có thẩm quyền thu hồi Giấy phép thành lập của chi nhánh, công ty luật nước ngoài tại Việt Nam.", "opts": {"a": "Đúng", "b": "Sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Sai", "topic": "license"},
+{"id": 112, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung 2012), Luật sư có quyền:", "opts": {"a": "Tiết lộ thông tin về vụ án mà mình đã thực hiện trong khi hành nghề khi thực hiện việc giảng dạy và được khách hàng đồng ý", "b": "Nhận thêm những khoản tiền, lợi ích khác từ khách hàng ngoài khoản thù lao và chi phí đã thỏa thuận với khách hàng trong hợp đồng dịch vụ pháp lý;", "c": "Giúp khách hàng cung cấp những thông tin, tài liệu dù có thể là không có thật cho cơ quan Nhà nước để bảo vệ quyền và lợi ích của khách hàng khi cần thiết.", "d": "Cả 3 ý trên đều sai"}, "ans": "a", "exp": "Đáp án đúng là: a. Tiết lộ thông tin về vụ án mà mình đã thực hiện trong khi hành nghề khi thực hiện việc giảng dạy và được khách hàng đồng ý", "topic": "general"},
+{"id": 113, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung năm 2012), kể từ ngày gia nhập Đoàn Luật sư, người đã được cấp Chứng chỉ hành nghề luật sư bị thu hồi Chứng chỉ hành nghề luật sư nếu không thành lập, tham gia thành lập hoặc làm việc theo hợp đồng lao động cho một tổ chức hành nghề luật sư hoặc đăng ký hành nghề với tư cách cá nhân trong thời hạn:", "opts": {"a": "1 năm", "b": "2 năm", "c": "3 năm", "d": "4 năm"}, "ans": "c", "exp": "Đáp án đúng là: c. 3 năm", "topic": "organization"},
+{"id": 114, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung năm 2012), kể từ ngày được cấp Chứng chỉ hành nghề luật sư, người đã được cấp Chứng chỉ hành nghề luật sư bị thu hồi Chứng chỉ hành nghề luật sư nếu không gia nhập một Đoàn luật sư nào trong thời hạn:", "opts": {"a": "1 năm", "b": "2 năm", "c": "3 năm", "d": "4 năm"}, "ans": "b", "exp": "Đáp án đúng là: b. 2 năm", "topic": "organization"},
+{"id": 115, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), chương trình khung đào tạo nghề luật sư do ai quy định:", "opts": {"a": "Thủ tướng Chính phủ", "b": "Bộ trưởng Bộ Tư pháp", "c": "Chủ tịch Liên đoàn luật sư Việt Nam", "d": "Giám đốc Học viện Tư pháp"}, "ans": "b", "exp": "Đáp án đúng là: b. Bộ trưởng Bộ Tư pháp", "topic": "general"},
+{"id": 116, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), cơ quan lãnh đạo cao nhất của Liên đoàn Luật sư Việt Nam là:", "opts": {"a": "Hội đồng luật sư toàn quốc", "b": "Đại hội đại biểu luật sư toàn quốc", "c": "Ban thường vụ Liên đoàn Luật sư Việt Nam", "d": "Chủ tịch Liên đoàn Luật sư Việt Nam"}, "ans": "b", "exp": "Đáp án đúng là: b. Đại hội đại biểu luật sư toàn quốc", "topic": "organization"},
+{"id": 117, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), cơ quan nào quy định về cơ sở đào tạo nghề luật sư:", "opts": {"a": "Chính phủ", "b": "Bộ Tư pháp", "c": "Liên đoàn luật sư Việt Nam", "d": "Học viện Tư pháp"}, "ans": "a", "exp": "Đáp án đúng là: a. Chính phủ", "topic": "general"},
+{"id": 118, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), kể từ ngày được cấp Thẻ luật sư, Ban chủ nhiệm Đoàn luật sư có quyền xóa tên luật sư khỏi danh sách luật sư nếu luật sư không hành nghề luật sư:", "opts": {"a": "Trong thời hạn 3 năm liên tục", "b": "Trong thời hạn 5 năm liên tục", "c": "Trong thời hạn 10 năm liên tục", "d": "Cả 3 câu đều sai"}, "ans": "a", "exp": "Đáp án đúng là: a. Trong thời hạn 3 năm liên tục", "topic": "organization"},
+{"id": 119, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), kể từ ngày được cấp Thẻ luật sư, Ban chủ nhiệm Đoàn luật sư có quyền xóa tên luật sư khỏi danh sách luật sư nếu luật sư không làm việc theo hợp đồng lao động cho tổ chức hành nghề luật sư hoặc hành nghề với tư cách cá nhân theo hợp đồng lao động cho cơ quan, tổ chức hoặc không thành lập, tham gia thành lập tổ chức hành nghề luật sư tại địa phương nơi Đoàn luật sư có trụ sở trong thời hạn:", "opts": {"a": "2 năm", "b": "3 năm", "c": "4 năm", "d": "5 năm"}, "ans": "b", "exp": "Đáp án đúng là: b. 3 năm", "topic": "organization"},
+{"id": 120, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Liên đoàn Luật sư Việt Nam có nhiệm vụ, quyền hạn:", "opts": {"a": "Thu hồi Chứng chỉ hành nghề luật sư.", "b": "Tổ chức đào tạo nghề luật sư.", "c": "Phối hợp với Bộ Tư pháp xây dựng chương trình và hướng dẫn các Đoàn luật sư thực hiện bồi dưỡng bắt buộc về chuyên môn, nghiệp vụ.", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "organization"},
+{"id": 121, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Liên đoàn Luật sư Việt Nam có nhiệm vụ, quyền hạn:", "opts": {"a": "Tổ chức kiểm tra và chịu trách nhiệm về kết quả kiểm tra tập sự hành nghề luật sư theo quy định của Luật Luật sư.", "b": "Tổ chức bình chọn, vinh danh luật sư, tổ chức hành nghề luật sư có uy tín, có nhiều cống hiến trong hoạt động nghề nghiệp.", "c": "Quy định việc miễn, giảm thù lao, việc giải quyết tranh chấp liên quan đến thù lao, chi phí của luật sư.", "d": "Cả 3 câu trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng", "topic": "organization"},
+{"id": 122, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Luật sư có nghĩa vụ:", "opts": {"a": "Có thái độ hợp tác, tôn trọng người tiến hành tố tụng mà luật sư tiếp xúc khi hành nghề.", "b": "Tham gia bồi dưỡng bắt buộc về chuyên môn, nghiệp vụ.", "c": "a và b đều đúng", "d": "a và b đều sai"}, "ans": "c", "exp": "Đáp án đúng là: c. a và b đều đúng", "topic": "general"},
+{"id": 123, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Luật sư có quyền:", "opts": {"a": "Đại diện cho khách hàng theo quy định của pháp luật.", "b": "Chỉ hành nghề luật sư trên toàn lãnh thổ Việt", "c": "a và b đều đúng", "d": "a và b đều sai"}, "ans": "c", "exp": "Đáp án đúng là: c. a và b đều đúng", "topic": "general"},
+{"id": 124, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Luật sư hành nghề với tư cách cá nhân có trách nhiệm:", "opts": {"a": "Chỉ được đăng ký một địa điểm giao dịch và không có con dấu.", "b": "Cung cấp dịch vụ pháp lý cho khách hàng theo hợp đồng dịch vụ pháp lý, làm việc cho cơ quan, tổ chức theo hợp đồng lao động.", "c": "Không được cung cấp dịch vụ pháp lý cho cá nhân, cơ quan, tổ chức khác ngoài cơ quan, tổ chức mình đã ký hợp đồng lao động, trừ trường hợp được cơ quan nhà nước yêu cầu hoặc tham gia tố tụng trong vụ án hình sự theo yêu cầu của cơ quan tiến hành tố tụng và thực hiện trợ giúp pháp lý theo sự phân công của Đoàn luật sư mà luật sư là thành viên.", "d": "Cả 3 câu trên đều đúng"}, "ans": "c", "exp": "Đáp án đúng là: c. Không được cung cấp dịch vụ pháp lý cho cá nhân, cơ quan, tổ chức khác ngoài cơ quan, tổ chức mình đã ký hợp đồng lao động, trừ trường hợp được cơ quan nhà nước yêu cầu hoặc tham gia tố tụng trong vụ án hình sự theo yêu cầu của cơ quan tiến hành tố tụng và thực hiện trợ giúp pháp lý theo sự phân công của Đoàn luật sư mà luật sư là thành viên.", "topic": "license"},
+{"id": 125, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Luật sư hành nghề với tư cách cá nhân là:", "opts": {"a": "Tự mình nhận vụ, việc, cung cấp dịch vụ pháp lý cho khách hàng, chịu trách nhiệm bằng toàn bộ tài sản của mình đối với hoạt động hành nghề và hoạt động theo loại hình hộ kinh doanh cá thể.", "b": "Làm việc theo hợp đồng lao động cho cơ quan, tổ chức không phải là tổ chức hành nghề luật sư.", "c": "Chỉ được đăng ký một địa điểm giao dịch và không có con dấu.", "d": "Cả 3 câu trên đều đúng"}, "ans": "b", "exp": "Đáp án đúng là: b. Làm việc theo hợp đồng lao động cho cơ quan, tổ chức không phải là tổ chức hành nghề luật sư.", "topic": "license"},
+{"id": 126, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Luật sư được hành nghề dưới hình thức:", "opts": {"a": "Luật sư hành nghề tự do với tư cách cá nhân theo loại hình hộ kinh doanh cá thể.", "b": "Luật sư hành nghề với tư cách cá nhân dưới hình thức làm việc theo hợp đồng lao động cho cơ quan, tổ chức không phải là tổ chức hành nghề luật sư", "c": "a và b đều đúng", "d": "a và b đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Luật sư hành nghề với tư cách cá nhân dưới hình thức làm việc theo hợp đồng lao động cho cơ quan, tổ chức không phải là tổ chức hành nghề luật sư", "topic": "license"},
+{"id": 127, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), người tập sự hành nghề luật sư được thực hiện các công việc sau:", "opts": {"a": "Đại diện, bào chữa, bảo vệ quyền và lợi ích hợp pháp cho khách hàng tại phiên tòa;", "b": "Tư vấn pháp luật", "c": "Được đi cùng với luật sư hướng dẫn gặp gỡ người bị tạm giữ, bị can, bị cáo khi được người đó đồng ý.", "d": "Cả 3 câu trên đều"}, "ans": "c", "exp": "Đáp án đúng là: c. Được đi cùng với luật sư hướng dẫn gặp gỡ người bị tạm giữ, bị can, bị cáo khi được người đó đồng ý.", "topic": "training"},
+{"id": 128, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), người đã gia nhập Đoàn luật sư có quyền:", "opts": {"a": "Làm việc theo hợp đồng lao động cho bất kỳ tổ chức hành nghề luật sư.", "b": "Tự mình nhận vụ việc, cung cấp dịch vụ pháp lý cho khách hàng mà không cần phải thông qua Đoàn luật sư hoặc tổ chức hành nghề luật sư", "c": "a và b đều đúng", "d": "a và ba đều sai"}, "ans": "a", "exp": "Đáp án đúng là: a. Làm việc theo hợp đồng lao động cho bất kỳ tổ chức hành nghề luật sư.", "topic": "organization"},
+{"id": 129, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), thành viên của Đoàn luật sư là:", "opts": {"a": "Luật sư.", "b": "Luật sư, người tập sự hành nghề luật sư.", "c": "Luật sư, người tập sự hành nghề luật sư, nhân viên văn phòng."}, "ans": "a", "exp": "Đáp án đúng là: a. Luật sư.", "topic": "organization"},
+{"id": 130, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), thẻ luật sư có giá trị:", "opts": {"a": "10 năm", "b": "15 năm", "c": "20 năm", "d": "Không thời hạn"}, "ans": "d", "exp": "Đáp án đúng là: d. Không thời hạn", "topic": "general"},
+{"id": 131, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), thẻ luật sư được đổi khi:", "opts": {"a": "Hết thời hạn sử dụng ghi trên thẻ", "b": "Khi luật sư chuyển Đoàn luật sư", "c": "Khi bị mất, hỏng.", "d": "b và c đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. b và c đúng", "topic": "general"},
+{"id": 132, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), trong trường hợp người tập sự hành nghề luật sư đi cùng với luật sư hướng dẫn trong các vụ việc dân sự, vụ án hành chính, khi liên hệ với cá nhân, cơ quan, tổ chức, luật sư hướng dẫn có trách nhiệm xuất trình:", "opts": {"a": "Giấy giới thiệu người tập sự hành nghề luật sư của tổ chức hành nghề luật sư.", "b": "Giấy giới thiệu người tập sự hành nghề luật sư của tổ chức hành nghề luật sư và Giấy chứng nhận người tập sự hành nghề luật sư", "c": "Giấy chứng nhận người tập sự hành nghề luật sư và giấy tờ xác nhận có sự đồng ý của khách hàng.", "d": "Giấy giới thiệu người tập sự hành nghề luật sư của tổ chức hành nghề luật sư và giấy tờ xác nhận có sự đồng ý của khách hàng."}, "ans": "c", "exp": "Đáp án đúng là: c. Giấy chứng nhận người tập sự hành nghề luật sư và giấy tờ xác nhận có sự đồng ý của khách hàng.", "topic": "training"},
+{"id": 133, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), trường hợp nào thì Bộ trưởng Bộ Tư pháp không cấp Chứng chỉ hành nghề luật sư:", "opts": {"a": "Không cư ngụ tại Việt", "b": "Cán bộ, công chức, viên chức đã bị buộc thôi việc chưa được ba năm kể từ ngày quyết định buộc thôi việc có hiệu lực.", "c": "Đã bị kết án về tội phạm nghiêm trọng do cố ý, tội phạm rất nghiêm trọng do cố ý, tội phạm đặc biệt nghiêm trọng do cố ý. d Cả 3 câu trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng", "topic": "license"},
+{"id": 134, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), tại cùng một thời điểm, một luật sư không được hướng dẫn tối đa bao nhiêu người tập sự hành nghề luật sư:", "opts": {"a": "1 người", "b": "2 người", "c": "3 người", "d": "4 người"}, "ans": "c", "exp": "Đáp án đúng là: c. 3 người", "topic": "training"},
+{"id": 135, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), tổ chức hành nghề luật sư có nghĩa vụ:", "opts": {"a": "Nhận người tập sự hành nghề luật sư và cử luật sư có đủ điều kiện hướng dẫn.", "b": "Thực hiện việc quản lý và bảo đảm cho luật sư của tổ chức mình Quy tắc đạo đức và ứng xử nghề nghiệp luật sư Việt", "c": "Thực hiện nghĩa vụ báo cáo về tổ chức, hoạt động của tổ chức mình cho Sở Tư pháp và Đoàn Luật sư nơi tổ chức mình đặt trụ sở.", "d": "Cả 3 câu đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng.", "topic": "license"},
+{"id": 136, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), tổ chức hành nghề luật sư có quyền:", "opts": {"a": "Hợp tác với tổ chức hành nghề luật sư nước ngoài, thuê luật sư nước ngoài làm việc cho tổ chức hành nghề luật sư, đặt cơ sở hành nghề ở nước ngoài.", "b": "Tham gia xây dựng chính sách, pháp luật của Nhà nước.", "c": "a và b đều đúng.", "d": "a và b đều"}, "ans": "c", "exp": "Đáp án đúng là: c. a và b đều đúng.", "topic": "license"},
+{"id": 137, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), tổ chức hành nghề luật sư có trách nhiệm:", "opts": {"a": "Tạo điều kiện cho luật sư của tổ chức mình thực hiện trợ giúp pháp lý, tham gia công tác đào tạo, bồi dưỡng cho luật sư.", "b": "Bồi thường thiệt hại do lỗi mà luật sư gây ra cho khách hàng, nếu luật sư đó là thành viên thành lập tổ chức hành nghề luật sư", "c": "Mua bảo hiểm trách nhiệm nghề nghiệp cho luật sư là thành viên thành lập tổ chức hành nghề luật sư", "d": "Cả 3 câu trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng", "topic": "license"},
+{"id": 138, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), tổ chức xã hội – nghề nghiệp của luật sư là:", "opts": {"a": "Đoàn luật sư ở tỉnh, thành phố trực thuộc trung ương", "b": "Liên đoàn luật sư Việt Nam", "c": "a và b đều đúng.", "d": "a và b đều"}, "ans": "c", "exp": "Đáp án đúng là: c. a và b đều đúng.", "topic": "ethics"},
+{"id": 139, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), việc hợp nhất, sáp nhập tổ chức hành nghề luật sư được thực hiện như sau:", "opts": {"a": "Hai hoặc nhiều Công ty luật, Văn phòng luật sư có thể hợp nhất thành một tổ chức hành nghề luật sư mới, bằng cách chuyển toàn bộ tài sản, quyền, nghĩa vụ và lợi ích hợp pháp sang tổ chức hành nghề luật sư hợp nhất, đồng thời chấm dứt tồn tại của các tổ chức hành nghề luật sư bị hợp nhất.", "b": "Một hoặc nhiều Công ty luật có thể sáp nhập vào một Công ty luật khác bằng cách chuyển toàn bộ tài sản, quyền, nghĩa vụ và lợi ích hợp pháp sang tổ chức hành nghề luật sư nhận sáp nhập, đồng thời chấm dứt sự tồn tại của Công ty luật, Văn phòng luật sư bị sáp nhập.", "c": "Văn phòng luật sư có thể chuyển đổi thành công ty luật trên cơ sở kế thừa toàn bộ quyền, nghĩa vụ của văn phòng luật sư theo quy định của pháp luật.", "d": "Cả 3 câu trên đều đúng."}, "ans": "c", "exp": "Đáp án đúng là: c. Văn phòng luật sư có thể chuyển đổi thành công ty luật trên cơ sở kế thừa toàn bộ quyền, nghĩa vụ của văn phòng luật sư theo quy định của pháp luật.(điều 45 Luật luật sư)", "topic": "license"},
+{"id": 140, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), việc kiểm tra kết quả tập sự hành nghề luật sư do ai tổ chức:", "opts": {"a": "Bộ Tư pháp", "b": "Liên đoàn luật sư Việt Nam", "c": "a và b đều sai", "d": "a và b đều đúng"}, "ans": "b", "exp": "Đáp án đúng là: b. Liên đoàn luật sư Việt Nam", "topic": "training"},
+{"id": 141, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Đoàn luật sư có nhiệm vụ, quyền hạn:", "opts": {"a": "Thực hiện bồi dưỡng bắt buộc về chuyên môn, nghiệp vụ, bồi dưỡng kỹ năng quản trị, điều hành tổ chức hành nghề luật sư.", "b": "Giám sát việc mua bảo hiểm trách nhiệm nghề nghiệp của luật sư.", "c": "Hòa giải tranh chấp giữa người tập sự hành nghề luật sư, luật sư với tổ chức hành nghề luật sư; giữa khách hàng với tổ chức hành nghề luật sư và luật sư.", "d": "Cả 3 câu trên đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng.", "topic": "organization"},
+{"id": 142, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Đoàn luật sư có nhiệm vụ, quyền hạn:", "opts": {"a": "Thực hiện rà soát, đánh giá hàng năm chất lượng đội ngũ luật sư.", "b": "Cấp Giấy chứng nhận người tập sự hành nghề luật sư và giám sát người tập sự hành nghề luật sư; lập danh sách những người đủ điều kiện tham dự kiểm tra kết quả tập sự hành nghề luật sư gửi Bộ Tư pháp.", "c": "Áp dụng biện pháp kỷ luật thu hồi Chứng chỉ hành nghề luật sư.", "d": "Cả 3 câu trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng", "topic": "organization"},
+{"id": 143, "q": "Theo Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), Đoàn luật sư là tổ chức xã hội – nghề nghiệp của luật sư ở tỉnh, thành phố trực thuộc trung ương, được thành lập khi có ít nhất:", "opts": {"a": "3 người có Chứng chỉ hành nghề luật sư.", "b": "5 người có Chứng chỉ hành nghề luật sư.", "c": "7 người có Chứng chỉ hành nghề luật sư.", "d": "10 người có Chứng chỉ hành nghề luật sư."}, "ans": "a", "exp": "Đáp án đúng là: a. 3 người có Chứng chỉ hành nghề luật sư.", "topic": "organization"},
+{"id": 144, "q": "Theo Luật Luật sư năm 2006, một luật sư được thành lập hoặc tham gia thành lập tối đa bao nhiêu tổ chức hành nghề luật sư:", "opts": {"a": "1", "b": "2", "c": "5", "d": "Không giới hạn"}, "ans": "a", "exp": "Đáp án đúng là: a. 1", "topic": "license"},
+{"id": 145, "q": "Theo Luật Luật sư năm 2006, thù lao của luật sư được tính theo phương thức sau:", "opts": {"a": "Giờ làm việc của luật sư.", "b": "Mức thù lao trọn gói.", "c": "Theo tỷ lệ phần trăm của giá ngạch vụ kiện hoặc giá trị hợp đồng, giá trị dự án.", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "fee"},
+{"id": 146, "q": "Theo Luật Luật sư năm 2006, việc công nhận đào tạo nghề luật sư ở nước ngoài do ai quy định:", "opts": {"a": "Thủ tướng Chính phủ", "b": "Bộ trưởng Bộ Tư pháp", "c": "Chủ tịch Liên đoàn luật sư Việt Nam", "d": "Giám đốc Học viện Tư pháp"}, "ans": "b", "exp": "Đáp án đúng là: b. Bộ trưởng Bộ Tư pháp", "topic": "general"},
+{"id": 147, "q": "Theo Luật Luật sư đã được sửa đổi bổ sung, Luật sư được hành nghề dưới hình thức:", "opts": {"a": "Hành nghề trong tổ chức hành nghề luật sư thông qua việc thành lập, tham gia thành lập hoặc làm việc theo hợp đồng lao động cho tổ chức hành nghề luật sư", "b": "Hành nghề với tư cách cá nhân thông qua việc tự mình nhận vụ, việc, cung cấp dịch vụ pháp lý cho khách hàng, chịu trách nhiệm bằng toàn bộ tài sản của mình đối với hoạt động hành nghề và hoạt động theo loại hình hộ kinh doanh cá thể.", "c": "a và b đều đúng", "d": "a và b đều sai"}, "ans": "a", "exp": "Đáp án đúng là: a. Hành nghề trong tổ chức hành nghề luật sư thông qua việc thành lập, tham gia thành lập hoặc làm việc theo hợp đồng lao động cho tổ chức hành nghề luật sư", "topic": "license"},
+{"id": 148, "q": "Theo Luật luật sư, thời gian tập sự hành nghề luật sư là:", "opts": {"a": "12 tháng.", "b": "18 tháng.", "c": "18 tháng; trường hợp có văn bản xin giảm của Đoàn luật sư thì còn 12 tháng.", "d": "18 tháng; trường hợp có văn bản xin giảm của Đoàn luật sư và được Liên đoàn luật sư Việt Nam đồng ý thì còn 12 tháng."}, "ans": "a", "exp": "Đáp án đúng là: a. 12 tháng.(Khoản 1 Điều 14 LLS-VBHN 2015; Điều 10 TT10/2021/TT-BTP)", "topic": "training"},
+{"id": 149, "q": "Theo Nghị định số 123/2013/NĐ-CP ngày 14/10/2013 của chính phủ, luật sư có nghĩa vụ:", "opts": {"a": "Không được từ chối các hợp đồng dịch vụ pháp lý đối với người nghèo và phải tham gia các khóa học do Đoàn Luật sư tổ chức.", "b": "Cung cấp các dịch vụ pháp lý cho người nghèo và tham gia các hội thảo, hội nghị góp ý các dự án luật.", "c": "Hỗ trợ pháp lý miễn phí cho người nghèo và học tập nâng cao kiến thức chuyên môn, kỹ năng hành nghề theo quy định của Luật Luật sư.", "d": "Trợ giúp pháp lý và tham gia bồi dưỡng bắt buộc về chuyên môn, nghiệp vụ theo quy định của Luật Luật sư."}, "ans": "d", "exp": "Đáp án đúng là: d. Trợ giúp pháp lý và tham gia bồi dưỡng bắt buộc về chuyên môn, nghiệp vụ theo quy định của Luật Luật sư.(Điều 3 và điều 4 NĐ số 123/2013/NĐ-CP)", "topic": "general"},
+{"id": 150, "q": "Theo quy định của Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012), hoạt động nghề nghiệp của luật sư và tổ chức hành nghề luật sư nhằm:", "opts": {"a": "Góp phần bảo vệ công lý, các quyền tự do, dân chủ của công dân", "b": "Bảo vệ các quyền, lợi ích của cá nhân, cơ quan, tổ chức, phát triển kinh tế – xã hội.", "c": "Xây dựng xã hội dân chủ, hiện đại, phát triển và giàu đẹp.", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "license"},
+{"id": 151, "q": "Theo quy định của Luật Luật sư và văn bản hướng dẫn thi hành, cơ sở đào tạo nghề luật sư là:", "opts": {"a": "Học viện Tư pháp", "b": "Học viện Tư pháp thuộc Bộ Tư pháp và cơ sở đào tạo nghề luật sư thuộc Liên đoàn luật sư Việt Nam", "c": "Cơ sở đào tạo nghề luật sư của Liên đoàn luật sư Việt Nam", "d": "Cơ sở đào tạo nghề luật sư theo quy định của Bộ Giáo dục và Đào tạo"}, "ans": "b", "exp": "Đáp án đúng là: b) Học viện Tư pháp thuộc Bộ Tư pháp và cơ sở đào tạo nghề luật sư thuộc Liên đoàn luật sư Việt Nam", "topic": "general"},
+{"id": 152, "q": "Theo quy định của Luật Luật sư và văn bản hướng dẫn thi hành, hồ sơ đăng ký tập sự hành nghề luật sư gồm:", "opts": {"a": "Giấy chứng nhận tốt nghiệp đào tạo nghề luật sư hoặc giấy tờ chứng minh được miễn đào tạo nghề luật sư", "b": "Giấy đề nghị đăng ký tập sự hành nghề luật sư; giấy xác nhận của tổ chức hành nghề luật sư về việc nhận tập sự; bản sao Giấy chứng nhận tốt nghiệp đào tạo nghề luật sư hoặc giấy tờ chứng minh được miễn đào tạo nghề luật sư", "c": "Giấy đề nghị đăng kts tập sự hành nghề luật sư; giấy xác nhận của tổ chức hành nghề luật sư về việc nhận tập sự", "d": "Giấy đề nghị đăng ký tập sự hành nghề luật sư"}, "ans": "b", "exp": "Đáp án đúng là: b) Giấy đề nghị đăng ký tập sự hành nghề luật sư; giấy xác nhận của tổ chức hành nghề luật sư về việc nhận tập sự; bản sao Giấy chứng nhận tốt nghiệp đào tạo nghề luật sư hoặc giấy tờ chứng minh được miễn đào tạo nghề luật sư", "topic": "training"},
+{"id": 153, "q": "Theo quy định của Luật luật sư, cơ quan có thẩm quyền tổ chức kiểm tra kết quả tập sự hành nghề Luật sư là:", "opts": {"a": "Học viện Tư pháp.", "b": "Liên đoàn Luật sư Việt Nam.", "c": "Bộ giáo dục và đào tạo.", "d": "Cả 3 phương án a,b,c đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Liên đoàn Luật sư Việt Nam.", "topic": "training"},
+{"id": 154, "q": "Theo quy định của Luật Luật sư, Luật sư được hiểu là:", "opts": {"a": "Luật sư là người thực hiện hợp đồng dịch vụ pháp lý theo yêu cầu của cá nhân, tổ chức (được gọi chung là khách hàng).", "b": "Luật sư là người có đủ tiêu chuẩn, điều kiện hành nghề theo quy định của Luật Luật sư.", "c": "Luật sư là người có đủ tiêu chuẩn, điều kiện hành nghề theo quy định của Luật Luật sư, thực hiện dịch vụ pháp lý theo yêu cầu của cá nhân, cơ quan, tổ chức (sau đây gọi chung là khách hàng).", "d": "Cả ba phương án trên đều sai."}, "ans": "c", "exp": "Đáp án đúng là: c. Luật sư là người có đủ tiêu chuẩn, điều kiện hành nghề theo quy định của Luật Luật sư, thực hiện dịch vụ pháp lý theo yêu cầu của cá nhân, cơ quan, tổ chức (sau đây gọi chung là khách hàng).(Điều 2 LLS-VBHN 2015)", "topic": "general"},
+{"id": 155, "q": "Theo quy định của Luật Luật sư, nguyên tắc quản lý luật sư và hành nghề luật sư được thực hiện như sau:", "opts": {"a": "Kết hợp quản lý nhà nước với chế độ tự quản của tổ chức xã hội – nghề nghiệp của luật sư, tổ chức hành nghề luật sư.", "b": "Nhà nước thống nhất quản lý về luật sư và hành nghề luật sư.", "c": "Tổ chức xã hội – nghề nghiệp của luật sư thực hiện việc tự quản đối với luật sư.", "d": "Cả ba phương án trên đều sai."}, "ans": "a", "exp": "Đáp án đúng là: a. Kết hợp quản lý nhà nước với chế độ tự quản của tổ chức xã hội – nghề nghiệp của luật sư, tổ chức hành nghề luật sư.(Khoản 1, điều 6 LLS-VBHN 2015)", "topic": "license"},
+{"id": 156, "q": "Theo quy định của Luật Luật sư, thì thẩm quyền tổ chức kiểm tra kết quả tập sự hành nghề luật sư là:", "opts": {"a": "Hội đồng kiểm tra do Học viện Tư pháp thành lập", "b": "Hội đồng kiểm tra do Liên đoàn luật sư Việt Nam thành lập", "c": "Hội đồng kiểm tra do Bộ Giáo dục và Đào tạo thành lậpd) Cả 3 phương án a,b,c đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b) Hội đồng kiểm tra do Liên đoàn luật sư Việt Nam thành lập", "topic": "training"},
+{"id": 157, "q": "Theo quy định của Luật Luật sư, tiêu chuẩn đầy đủ để trở thành luật sư là:", "opts": {"a": "Công dân Việt Nam có bằng cử nhân luật, đã được đào tạo nghề luật sư, đã qua thời gian tập sự hành nghề luật sư.", "b": "Công dân Việt Nam trung thành với Tổ quốc, tuân thủ Hiến pháp và pháp luật, có bẳng cử nhân luật, có sức khỏe bảo đảm hành nghề luật sư.", "c": "Công dân Việt Nam trung thành với tổ quốc, tuân thủ Hiến pháp và pháp luật, có phẩm chất đạo đức tốt, có bằng cử nhân luật, đã được đào tạo nghề luật sư, đã qua thời gian tập sự hành nghề luật sư, có sức khỏe đảm bảo hành nghề luật sư thì có thể trở thành luật sư.", "d": "Công dân Việt Nam trung thành với Tổ quốc, đã được đào tạo nghề Luật sư, đã qua thời gian tập sự hành nghề luật sư, có sức khỏe đảm bảo hành nghề luật sư."}, "ans": "c", "exp": "Đáp án đúng là: c. Công dân Việt Nam trung thành với tổ quốc, tuân thủ Hiến pháp và pháp luật, có phẩm chất đạo đức tốt, có bằng cử nhân luật, đã được đào tạo nghề luật sư, đã qua thời gian tập sự hành nghề luật sư, có sức khỏe đảm bảo hành nghề luật sư thì có thể trở thành luật sư.(Điều 10 LLS-VBHN 2015)", "topic": "general"},
+{"id": 158, "q": "Theo quy định của Điều lệ Liên đoàn luật sư Việt Nam, người phát ngôn chính thức của Liên đoàn luật sư Việt Nam là:", "opts": {"a": "Chủ tịch Liên đoàn luật sư Việt Nam", "b": "Một Phó Chủ tịch Liên đoàn do Chủ tịch Liên đoàn chỉ định", "c": "Tổng Thư ký Liên đoàn", "d": "Chánh Văn phòng Liên đoàn"}, "ans": "c", "exp": "Đáp án đúng là: c. Tổng Thư ký Liên đoàn", "topic": "organization"},
+{"id": 159, "q": "Theo Điều lệ Liên đoàn luật sư Việt Nam, Ban Chủ nhiệm Đoàn Luật sư có nhiệm vụ, quyền hạn:", "opts": {"a": "Kiểm tra,giám sát hoạt động của các tổ chức hành nghề luật sư, luật sư hành nghề với tư cách cá nhân tại địa phương", "b": "Hoà giải tranh chấp có liên quan đến hành nghề giữa khách hàng với luật sư; giữa khách hàng với tổ chức hành nghề luật sư.", "c": "Tổ chức kiểm tra việc tập sự hành nghề luật sư", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "organization"},
+{"id": 160, "q": "Theo Điều lệ Liên đoàn luật sư Việt Nam, Ban Thường vụ Liên đoàn luật sư Việt Nam có số lượng ủy viên tối đa là:", "opts": {"a": "19", "b": "21", "c": "25", "d": "29"}, "ans": "b", "exp": "Đáp án đúng là: b. 21", "topic": "organization"},
+{"id": 161, "q": "Thành viên của Công ty luật hợp danh và Công ty luật trách nhiệm hữu hạn là:", "opts": {"a": "Luật sư", "b": "Luật sư và người tập sự hành nghề luật sư", "c": "Luật sư và thành viên góp vốn", "d": "Luật sư, người tập sự hành nghề luật sư, thành viên góp vốn"}, "ans": "a", "exp": "Đáp án đúng là: a. Luật sư", "topic": "lawfirm"},
+{"id": 162, "q": "Thành viên của Liên đoàn Luật sư Việt Nam gồm", "opts": {"a": "Đoàn Luật sư tỉnh, thành phố trực thuộc trung ương.", "b": "Đoàn luật sư, luật sư.", "c": "Đoàn luật sư, luật sư và các tổ chức hành nghề luật sư.", "d": "Cả ba phương án trên đều đúng."}, "ans": "b", "exp": "Đáp án đúng là: b. Đoàn luật sư, luật sư.(Khoản 1, điều 64 LLS-VBHN 2015)", "topic": "organization"},
+{"id": 163, "q": "Thành viên của Liên đoàn luật sư Việt Nam là:", "opts": {"a": "Các Đoàn luật sư.", "b": "Các luật sư Việt Nam", "c": "Các Đoàn luật sư và các luật sư Việt Nam", "d": "Các Đoàn luật sư, các luật sư Việt Nam, thành viên danh dự là cá nhân không phải là luật sư."}, "ans": "a", "exp": "Đáp án đúng là: a. Các Đoàn luật sư.", "topic": "organization"},
+{"id": 164, "q": "Thời gian phải tập sự hành nghề luật sư của những người tập sự hành nghề luật sư tham gia khóa đào tạo nghề luật sư theo Chương trình khung đào tạo nghề luật sư 12 tháng là:", "opts": {"a": "12 tháng.", "b": "18 tháng.", "c": "18 tháng; trường hợp có văn bản xin giảm của Đoàn Luật sư thì còn 12 tháng.", "d": "18 tháng, trường hợp có văn bản xin giảm của Đoàn Luật sư và được Liên đoàn Luật sư Việt Nam đồng ý thì còn 12 tháng."}, "ans": "a", "exp": "Đáp án đúng là: a. 12 tháng.", "topic": "training"},
+{"id": 165, "q": "Thời gian tập sự hành nghề luât sư là:", "opts": {"a": "12 tháng kể từ ngày đăng ký tập sự tại Đoàn luật sư", "b": "12 tháng kể từ ngày đăng ký tập sự tại Tổ chức hành nghề luật sư", "c": "12 tháng kể từ ngày Ban chủ nhiệm Đoàn luật sư ra quyết định về việc đăng ký tập sự hành nghề luật sư", "d": "12 tháng kể từ ngày Tổ chức hành nghề luật sư ra quyết định nhận người tập sự hành nghề luật sư"}, "ans": "c", "exp": "Đáp án đúng là: c) 12 tháng kể từ ngày Ban chủ nhiệm Đoàn luật sư ra quyết định về việc đăng ký tập sự hành nghề luật sư", "topic": "training"},
+{"id": 166, "q": "Thời gian tập sự hành nghề luật sư được Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012) quy định là:", "opts": {"a": "12 tháng", "b": "18 tháng", "c": "24 tháng", "d": "3 câu trên đều"}, "ans": "a", "exp": "Đáp án đúng là: a. 12 tháng", "topic": "training"},
+{"id": 167, "q": "Thủ tục đăng ký hoạt động của chi nhánh của công ty luật nước ngoài tại Việt Nam thực hiện tại :", "opts": {"a": "Bộ Tư pháp.", "b": "Sở Tư pháp nơi đặt trụ sở Chi nhánh.", "c": "Sở Kế hoạch và Đầu tư nơi đặt trụ sở Chi nhánh.", "d": "Cả 3 câu a, b, c đều sai."}, "ans": "b", "exp": "Đáp án đúng là: b. Sở Tư pháp nơi đặt trụ sở Chi nhánh.", "topic": "lawfirm"},
+{"id": 168, "q": "Trong Luật luật sư, các hành vi luật sư bị nghiêm cấm được quy định tại điều", "opts": {"a": "7", "b": "12", "c": "9", "d": "Cả 3 phương án đều sai."}, "ans": "c", "exp": "Đáp án đúng là: c. 9 (Điều 9 LLS-VBHN 2015)", "topic": "general"},
+{"id": 169, "q": "Trong quan hệ với đồng nghiệp, Luật sư có nghĩa vụ:", "opts": {"a": "Bảo vệ danh dự, uy tín của giới luật sư như bảo vệ danh dự, uy tín của cá nhân mình.", "b": "Giữ gìn sự đoàn kết nội bộ, góp phần xây dựng đội ngũ luật sư ngày càng vững mạnh", "c": "Phản ánh với Ban Chủ nhiệm Đoàn Luật sư về những hành vi sai trái của đồng nghiệp.", "d": "a, b,c đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. a, b,c đều đúng.", "topic": "general"},
+{"id": 170, "q": "Trong quá trình hành nghề luật sư, khi tiếp nhận vụ việc của khách hàng, luật sư có nghĩa vụ:", "opts": {"a": "có nghĩa vụ giải thích cho khách hàng biết về nghĩa vụ của họ trong quan hệ với luật sư.", "b": "Thông báo cho khách hàng biết về quyền khiếu nại và thủ tục giải quyết khiếu nại của khách hàng đối với luật sư.", "c": "Có nghĩa vụ thông báo, giải thích cho khách hàng biết về những khó khăn trong thực hiện dịch vụ pháp lý.", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "client"},
+{"id": 171, "q": "Trong quá trình hành nghề luật sư, trên danh thiếp cũng như trên các bảng hiệu của tổ chức hành nghề luật sư, luật sư Nguyễn Văn A có quyền sử dụng chức danh nào", "opts": {"a": "Luật sư Nguyễn Văn A", "b": "Luật sư Nguyễn Văn A, Phóng viên Báo X, Phó Chủ tịch Hội Y", "c": "Thạc sĩ Luật sư Nguyễn Văn A, Phóng viên Báo X, Chủ tịch Hội Y", "d": "Thạc sĩ Luật sư Nguyễn Văn A, Phóng viên Báo X, Chủ tịch Hội Y, nguyên Chánh án Toà án Quận Z"}, "ans": "a", "exp": "Đáp án đúng là: a. Luật sư Nguyễn Văn A", "topic": "license"},
+{"id": 172, "q": "Trong quá trình thực hiện vụ việc của khách hàng cũng như trong quan hệ với khách hàng, luật sư có quyền:", "opts": {"a": "Nhận khoản tiền mà khách hàng tự nguyện thưởng cho luật sư khi kết thúc dịch vụ.", "b": "Mượn tạm tiền bạc hoặc tài sản của khách hàng trong khi hành nghề vào mục đích riêng của cá nhân luật sư.", "c": "Gợi ý để khách hàng tặng cho tài sản của khách hàng cho luật sư.", "d": "a, b, c đều đúng"}, "ans": "a", "exp": "Đáp án đúng là: a. Nhận khoản tiền mà khách hàng tự nguyện thưởng cho luật sư khi kết thúc dịch vụ.", "topic": "client"},
+{"id": 173, "q": "Trong quá trình thực hiện vụ việc của khách hàng cũng như trong quan hệ với khách hàng, luật sư không được:", "opts": {"a": "Lợi dụng nghề nghiệp để quan hệ tình cảm nam nữ bất chính với khách hàng làm ảnh hưởng tới danh dự luật sư và nghề luật sư", "b": "Thông tin trực tiếp cho khách hàng hoặc dùng lời lẽ ám chỉ để khách hàng biết về mối quan hệ cá nhân của mình với cơ quan tiến hành tố tụng, người tiến hành tố tụng, nhằm mục đích gây niềm tin với khách hàng về hiệu quả công việc như là một tiêu chí để khuyến khích khách hàng lựa chọn luật sư", "c": "Đòi hỏi tiền bạc hoặc lợi ích vật chất khi thực hiện trợ giúp pháp lý cho các khách hàng được hưởng trợ giúp pháp lý theo quy định của pháp luật", "d": "a, b,c đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. a, b,c đều đúng.", "topic": "client"},
+{"id": 174, "q": "Trong quá trình thực hiện vụ việc của khách hàng cũng như trong quan hệ với khách hàng, luật sư không được:", "opts": {"a": "Thuê người môi giới khách hàng để giành vụ việc cho mình", "b": "Cố ý làm cho khách hàng nhầm lẫn về khả năng và trình độ chuyên môn của mình", "c": "Cam kết bảo đảm kết quả vụ việc nhằm mục đích lôi kéo khách hàng hoặc để tính thù lao theo kết quả cam kết", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "client"},
+{"id": 175, "q": "Trong quá trình thực hiện vụ việc của khách hàng, Luật sư có quyền từ chối tiếp tục thực hiện vụ việc trong trường hợp:", "opts": {"a": "Khách hàng vi phạm cam kết theo hợp đồng dịch vụ pháp lý mà các bên không thể thỏa thuận được", "b": "Có sự đe dọa hoặc áp lực về vật chất hoặc tinh thần từ khách hàng hoặc người khác buộc luật sư phải làm trái pháp luật và đạo đức nghề nghiệp mà luật sư không thể đối phó", "c": "Khách hàng sử dụng dịch vụ pháp lý của luật sư để thực hiện hành vi trái pháp luật", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "client"},
+{"id": 176, "q": "Trong quá trình thực hiện vụ việc của khách hàng, Luật sư có quyền từ chối tiếp tục thực hiện vụ việc trong trường hợp:", "opts": {"a": "Khách hàng đưa ra yêu cầu mới.", "b": "Quan hệ giữa khách hàng với luật sư bị tổn hại xuất phát từ lỗi của luật sư", "c": "Khách hàng không chấp nhận ý kiến tư vấn giải quyết vụ việc phù hợp với đạo đức do luật sư đưa ra, mặc dù luật sư đã cố gắng phân tích thuyết phục.", "d": "a, b, c đều đúng"}, "ans": "c", "exp": "Đáp án đúng là: c. Khách hàng không chấp nhận ý kiến tư vấn giải quyết vụ việc phù hợp với đạo đức do luật sư đưa ra, mặc dù luật sư đã cố gắng phân tích thuyết phục.", "topic": "client"},
+{"id": 177, "q": "Trong thời gian tập sự hành nghề luật sư, người tập sự hành nghề luật sư có nghĩa vụ:", "opts": {"a": "Tuân theo sự hướng dẫn, phân công công việc của Luật sư hướng dẫn.", "b": "Đóng các khoản phí đóng góp cho tổ chức hành nghề luật sư theo yêu cầu của Luật sư hướng dẫn.", "c": "Thực hiện các công việc ngoài phạm vi tập sự nhưng theo yêu cầu của Luật sư hướng dẫn nhằm phục vụ cho Luật sư hướng dẫn", "d": "a, b, c đều đúng"}, "ans": "a", "exp": "Đáp án đúng là: a. Tuân theo sự hướng dẫn, phân công công việc của Luật sư hướng dẫn.", "topic": "training"},
+{"id": 178, "q": "Trong thời gian tập sự, ngoài nghĩa vụ tuân thủ các quy định của pháp luật về luật sư và hành nghề luật sư, người tập sự hành nghề luật sư còn có nghĩa vụ:", "opts": {"a": "Lập nhật ký tập sự, trong đó ghi chép đẩy đủ việc thực hiện các công việc trong thời gian tập sự", "b": "Lập nhật ký tập sự, trong đó ghi chép đầy đủ số lần bảo chứa, đại diện, bảo vệ quyển, lợi ích hợp pháp của khách hàng", "c": "Lập thời khóa biểu tập sự, trong đó ghi chép đầy đủ số lần tham gia tổ tụng, đại diện ngoài tố tụng, tư vấn pháp luật và thực hiện dịch vụ pháp lý khác cho khách hàng", "d": "Lập thời khóa biểu tập sự, ghi chép lịch đến tổ chức hành nghề tập sự"}, "ans": "a", "exp": "Đáp án đúng là: a) Lập nhật ký tập sự, trong đó ghi chép đẩy đủ việc thực hiện các công việc trong thời gian tập sự", "topic": "training"},
+{"id": 179, "q": "Trong trường hợp có sự đe dọa hoặc áp lực về vật chất hoặc tinh thần từ khách hàng hoặc người khác buộc luật sư phải làm trái pháp luật và đạo đức nghề nghiệp mà tổ chức hành nghề luật sư không thể đối phó, tổ chức hành nghề luật sư có quyền đơn phương chấm dứt thực hiện dịch vụ pháp lý nhưng có trách nhiệm:", "opts": {"a": "Thông báo bằng văn bản cho khách hàng về việc đơn phương chấm dứt thực hiện dịch vụ pháp lý.", "b": "Thông báo bằng văn bản cho khách hàng về việc đơn phương chấm dứt thực hiện dịch vụ pháp lý trong thời hạn hợp lý để khách hàng có điều kiện tìm luật sư khác và giải quyết nhanh chóng các vấn đề liên quan đến việc chấm dứt hợp đồng dịch vụ pháp lý đã ký kết", "c": "Tiến hành thanh lý hợp đồng dịch vụ pháp lý đã ký kết", "d": "Từ chối thẳng thừng, có thái độ dứt khoát chấm dứt việc tiếp tục thực hiện dịch vụ pháp lý dù khách hàng không đồng ý thanh lý hợp đồng dịch vụ pháp lý"}, "ans": "b", "exp": "Đáp án đúng là: b. Thông báo bằng văn bản cho khách hàng về việc đơn phương chấm dứt thực hiện dịch vụ pháp lý trong thời hạn hợp lý để khách hàng có điều kiện tìm luật sư khác và giải quyết nhanh chóng các vấn đề liên quan đến việc chấm dứt hợp đồng dịch vụ pháp lý đã ký kết", "topic": "client"},
+{"id": 180, "q": "Trong trường hợp không đồng ý với quyết định giải quyết khiếu nại của Ban thường vụ Liên đoàn luật sư Việt Nam đối với hình thức kỷ luật khiển trách hoặc cảnh cáo, Luật sư có thể:", "opts": {"a": "Khởi kiện tại Tòa án;", "b": "Khiếu nại đến Bộ trưởng Bộ Tư pháp;", "c": "Phải thực hiện quyết định giải quyết khiếu nại của Ban thường vụ Liên đoàn luật sư Việt Nam và không được quyền tiếp tục khiếu nại", "d": "Cả 3 câu trên đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Khiếu nại đến Bộ trưởng Bộ Tư pháp;", "topic": "discipline"},
+{"id": 181, "q": "Trong trường hợp không đồng ý với quyết định giải quyết khiếu nại của Ban thường vụ Liên đoàn luật sư Việt Nam đối với hình thức kỷ luật tạm đình chỉ tư cách thành viên Đoàn Luật sư từ sáu tháng đến hai mươi bốn tháng hoặc xóa tên khỏi danh sách luật sư của Đoàn Luật sư, Luật sư có quyền:", "opts": {"a": "Khởi kiện tại Tòa án;", "b": "Khiếu nại đến Bộ trưởng Bộ Tư pháp;", "c": "Phải thực hiện quyết định giải quyết khiếu nại của Ban thường vụ Liên đoàn luật sư Việt Nam và không được quyền tiếp tục khiếu nại", "d": "Cả 3 câu trên đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Khiếu nại đến Bộ trưởng Bộ Tư pháp;", "topic": "discipline"},
+{"id": 182, "q": "Trong trường hợp người tập sự chấm dứt tập sự hành nghề luật sư vì bị xử lý kỷ luật bằng hình thức xoá tên khỏi danh sách người tập sự của Đoàn luật sư, người tập sự được đăng ký lại việc tập sự hành nghề luật sư sau thời hạn:", "opts": {"a": "1 năm kể từ ngày có quyết định kỷ luật", "b": "2 năm kể từ ngày có quyết định kỷ luật", "c": "3 năm kể từ ngày có quyết định kỷ luật", "d": "4 năm kể từ ngày có quyết định kỷ luật"}, "ans": "c", "exp": "Đáp án đúng là: c. 3 năm kể từ ngày có quyết định kỷ luật", "topic": "training"},
+{"id": 183, "q": "Trong trường hợp nào, luật sư bị xử lý kỷ luật bằng hình thức xóa tên khỏi danh sách luật sư của Đoàn Luật sư", "opts": {"a": "Bị kết án và bản án đã có hiệu lực pháp luật;", "b": "Đã bị xử lý kỷ luật bằng hình thức tạm đình chỉ tư cách thành viên Đoàn luật sư mà trong thời hạn mộtt năm kể từ ngày chấp hành xong quyết định kỷ luật, lại có hành vi vi phạm đến mức có thể bị xem xét xử lý kỷ luật bằng hình thức cảnh cáo trở lên.", "c": "12 tháng liên tục không đóng phí thành viên Liên đoàn luật sư, phí thành viên Đoàn luật sư mà không có lý do chính đáng + 18 tháng sau khi công", "d": "Cả 3 câu đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu đều đúng", "topic": "discipline"},
+{"id": 184, "q": "Trong trường hợp nào, người đã được cấp Chứng chỉ hành nghề luật sư sẽ bị thu hồi Chứng chỉ hành nghề luật sư:", "opts": {"a": "Không còn cư ngụ tại Việt nam", "b": "Không gia nhập bất kỳ Đoàn Luật sư nào trong thời hạn hai năm, kể từ ngày được cấp chứng chỉ hành nghề luật sư", "c": "Bị xử phạt hành chính bằng hình thức tước quyền sử dụng chứng chỉ hành nghề luật sư có thời hạn.", "d": "Cả 3 câu trên đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng.", "topic": "license"},
+{"id": 185, "q": "Trong trường hợp phát hiện việc xem xét và quyết định kỷ luật luật sư của Đoàn luật sư vi phạm quy định của Luật Luật sư, Điều lệ Liên đoàn luật sư Việt Nam, Điều lệ Đoàn luật sư hoặc không đảm bảo tính khách quan, minh bạch, công bằng thì Ban Thường vụ Liên đoàn có quyền:", "opts": {"a": "Đình chỉ thi hành quyết định kỷ luật của Ban Chủ nhiệm và tuyên bố luật sư không vi phạm.", "b": "Đình chỉ thi hành quyết định kỷ luật của Ban Chủ nhiệm Đoàn luật sư và yêu cầu Hội đồng khen thưởng – kỷ luật, Ban Chủ nhiệm Đoàn luật sư tiến hành các thủ tục xem xét lại việc kỷ luật đối với luật sư đó", "c": "a và b đều đúng", "d": "a và b đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Đình chỉ thi hành quyết định kỷ luật của Ban Chủ nhiệm Đoàn luật sư và yêu cầu Hội đồng khen thưởng – kỷ luật, Ban Chủ nhiệm Đoàn luật sư tiến hành các thủ tục xem xét lại việc kỷ luật đối với luật sư đó", "topic": "discipline"},
+{"id": 186, "q": "Trong trường hợp phát sinh tranh chấp giữa khách hàng và luật sư liên quan đến hoạt động hành nghề luật sư, cơ quan có trách nhiệm hòa giải là:", "opts": {"a": "Tổ chức hành nghề luật sư nơi luật sư đó làm việc;", "b": "Ban Chủ nhiệm Đoàn Luật sư nơi luật sư đó là thành viên", "c": "Chỉ có Tòa án mới có quyền hòa giải", "d": "Cả 3 câu đều sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Ban Chủ nhiệm Đoàn Luật sư nơi luật sư đó là thành viên", "topic": "client"},
+{"id": 187, "q": "Trong trường hợp phát sinh tranh chấp về quyền lợi với đồng nghiệp, trước khi khởi kiện hoặc khiếu nại đồng nghiệp, luật sư có trách nhiệm:", "opts": {"a": "Chủ động liên hệ với luật sư đồng nghiệp để hoà giải. Nếu hoà giải không thành thì khởi kiện, khiếu nại đến cơ quan Nhà nước có thẩm quyền để giải quyết.", "b": "Yêu cầu Ủy ban nhân dân phường nơi đồng nghiệp cư trú tiến hành hoà giải trước khi khởi kiện hoặc khiếu nại.", "c": "Thông báo cho Ban Chủ nhiệm Đoàn Luật sư nơi luật sư là thành viên biết trước khi khởi kiện hoặc khiếu nại đến cơ quan Nhà nước có thẩm quyền.", "d": "a, b, c đều đúng"}, "ans": "a", "exp": "Đáp án đúng là: a. Chủ động liên hệ với luật sư đồng nghiệp để hoà giải. Nếu hoà giải không thành thì khởi kiện, khiếu nại đến cơ quan Nhà nước có thẩm quyền để giải quyết.", "topic": "general"},
+{"id": 188, "q": "Trong trường hợp thay đổi nơi tập sự hành nghề luật sư, thời gian tập sự tại mỗi tổ chức hành nghề luật sư ít nhất là:", "opts": {"a": "03 tháng", "b": "04 tháng", "c": "05 tháng", "d": "2 tháng"}, "ans": "d", "exp": "Đáp án đúng là: 2 tháng (khoản 4 điều 9 thông tư 10/2021)", "topic": "training"},
+{"id": 189, "q": "Trong vụ án tranh chấp dân sự, khi thực hiện vụ việc của khách hàng, Luật sư có trách nhiệm:", "opts": {"a": "Không từ chối vụ việc đã nhận, trừ trường hợp bất khả kháng, hoặc pháp luật hay Quy tắc Đạo đức và Ứng xử nghề nghiệp luật sư cho phép hoặc được khách hàng đồng ý", "b": "Tham gia các buổi làm việc, hòa giải, xét xử của Tòa án và chỉ thông báo cho khách hàng biết về nội dung bản án của Tòa án.", "c": "Hoàn trả tài liệu, hồ sơ khi khách hàng yêu cầu hoặc khi đã giải quyết xong vụ việc.", "d": "a, b, c đều đúng"}, "ans": "c", "exp": "Đáp án đúng là: c. Hoàn trả tài liệu, hồ sơ khi khách hàng yêu cầu hoặc khi đã giải quyết xong vụ việc.", "topic": "client"},
+{"id": 190, "q": "Trách nhiệm quản lý nhà nước về luật sư và hành nghề luật sư:", "opts": {"a": "Chính phủ thống nhất quản lý nhà nước về luật sư và hành nghề luật sư.", "b": "Bộ Tư pháp chịu trách nhiệm trước Chính phủ thực hiện quản lý nhà nước về luật sư và hành nghề luật sư.", "c": "Các bộ, cơ quan ngang bộ trong phạm vi nhiệm vụ, quyền hạn của mình có trách nhiệm phối hợp với Bộ Tư pháp trong việc quản lý nhà nước về luật sư và hành nghề luật sư.", "d": "Cả 3 phương án trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 phương án trên đều đúng(Điều 83 LLS).", "topic": "license"},
+{"id": 191, "q": "Trường hợp nào sau đây bị thu hồi chứng chỉ hành nghề luật sư?", "opts": {"a": "Không gia nhập một Đoàn luật sư nào trong thời hạn hai năm, kể từ ngày được cấp Chứng chỉ hành nghề luật sư.", "b": "Không thành lập, tham gia thành lập hoặc làm việc theo hợp đồng lao động cho một tổ chức hành nghề luật sư trong thời hạn hai năm, kể từ ngày gia nhập Đoàn luật sư.", "c": "Không gia nhập một Đoàn luật sư nào trong thời hạn một năm, kể từ ngày được cấp Chứng chỉ hành nghề luật sư.", "d": "Không đăng ký hành nghề với tư cách cá nhân trong thời hạn hai năm, kể từ ngày gia nhập Đoàn luật sư."}, "ans": "a", "exp": "Đáp án đúng là: a. Không gia nhập một Đoàn luật sư nào trong thời hạn hai năm, kể từ ngày được cấp Chứng chỉ hành nghề luật sư.(Điểm d, khoảng 1, điều 18 VBHN LLS 2015)", "topic": "license"},
+{"id": 192, "q": "Tùy theo tính chất, mức độ vi phạm quy định của Luật Luật sư, Điều lệ, Quy tắc đạo đức và ứng xử nghề nghiệp luật sư Việt Nam và quy định khác của tổ chức xã hội – nghề nghiệp của luật sư, luật sư vi phạm phải chịu một trong các hình thức kỷ luật sau:", "opts": {"a": "Khiển trách hoặc cảnh cáo.", "b": "Tạm đình chỉ tư cách thành viên Đoàn luật sư từ sáu tháng đến hai mươi bốn tháng.", "c": "Xoá tên khỏi danh sách luật sư của Đoàn luật sư.", "d": "a, b,c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b,c đều đúng", "topic": "discipline"},
+{"id": 193, "q": "Tổ chức có trách nhiệm giám sát luật sư và tổ chức hành nghề luật sư gồm có", "opts": {"a": "Sở tư pháp thành phố.", "b": "Tổ chức hành nghề luật sư và Đoàn luật sư.", "c": "Cục bổ trợ tư pháp – Bộ tư pháp.", "d": "Cả ba phương án trên đều đúng."}, "ans": "b", "exp": "Đáp án đúng là: b. Tổ chức hành nghề luật sư và Đoàn luật sư.(Khoản 2, 3, Điều 61 LLS-VBHN 2015).", "topic": "license"},
+{"id": 194, "q": "Tổ chức hành nghề luật sư bao gồm:", "opts": {"a": "Văn phòng luật sư", "b": "Công ty luật hợp danh, Công ty luật TNHH, Công ty luật cổ phần.", "c": "Văn phòng luật sư, Công ty luật hợp danh, Công ty luật", "d": "Văn phòng luật sư, Công ty luật hợp danh, Công ty luật TNHH, Công ty luật cổ phần"}, "ans": "c", "exp": "Đáp án đúng là: c. Văn phòng luật sư, Công ty luật hợp danh, Công ty luật", "topic": "license"},
+{"id": 195, "q": "Tổ chức hành nghề luật sư bị thu hồi Giấy đăng ký hoạt động trong trường hợp nào sau đây?", "opts": {"a": "Không đăng ký mã số thuế trong thời hạn 01 năm kể từ ngày được cấp giấy đăng ký hoạt động.", "b": "Không hoạt động tại trụ sở đã đăng ký trong thời hạn 06 tháng liên tục, kể từ ngày được cấp Giấy đăng ký hoạt động.", "c": "Không đăng ký mã số thuế trong thời hạn 06 tháng hoặc không hoạt động tại trụ sở đã đăng ký trong thời hạn 06 tháng liên tục, kể từ ngày được cấp Giấy đăng ký hoạt động.", "d": "Phương án a và b đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Phương án a và b đều đúng", "topic": "license"},
+{"id": 196, "q": "Tổ chức hành nghề luật sư bị thu hồi Giấy đăng ký hoạt động trong trường hợp nào sau đây?", "opts": {"a": "Không đăng ký mã số thuế trong thời hạn 01 năm kể từ ngày được cấp giấy đăng ký hoạt động.", "b": "Không hoạt động tại trụ sở đã đăng ký trong thời hạn 06 tháng liên tục, kể từ ngày được cấp Giấy đăng ký hoạt động.", "c": "Chấm dứt hoạt động theo quy định tại Khoản 1 Điều 47 Luật Luật sư.", "d": "Tất cả phương án trên."}, "ans": "d", "exp": "Đáp án đúng là: d. Tất cả phương án trên.(Điều 17 NĐ 123/2013/NĐ-CP)", "topic": "license"},
+{"id": 197, "q": "Tổ chức hành nghề luật sư bị thu hồi Giấy đăng ký hoạt động trong trường hợp nào sau đây?", "opts": {"a": "Không đăng ký mã số thuế trong thời hạn 06 tháng kể từ ngày được cấp Giấy đăng ký hoạt động.", "b": "Không đăng ký mã số thuế trong thời hạn 01 năm kể từ ngày được cấp Giấy đăng ký hoạt động.", "c": "Không hoạt động trở lại hoặc không có báo cáo về việc tiếp tục tạm ngừng hoạt động quá 06 tháng, kể từ ngày hết thời hạn tạm ngừng hoạt động theo quy định của pháp luật.", "d": "Phương án b và c đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Phương án b và c đều đúng.(Khoảng 1, Điều 40 NĐ 123/2013/NĐ-CP)", "topic": "license"},
+{"id": 198, "q": "Tổ chức hành nghề luật sư bị thu hồi Giấy đăng ký hoạt động trong trường hợp nào sau đây?", "opts": {"a": "Không đăng ký mã số thuế trong thời hạnh 01 năm kể từ ngày được cấp Giấy đăng ký hoạt động và Không hoạt động tại trụ sở đã đăng ký trong thời hạnh 06 tháng liên tục, kể từ ngày được cấp Giấy đăng ký hoạt động", "b": "Không đăng ký mã số thuế trong thời hạn 06 tháng hoặc không hoạt động tại trụ sở đã đăng ký trong thời hạn 06 tháng liên tục, kể từ ngày được cấp Giấy đăng ký hoạt động", "c": "Phương án a và b đều đúng", "d": "Phương án a và b đều sai"}, "ans": "a", "exp": "Đáp án đúng là: a) Không đăng ký mã số thuế trong thời hạnh 01 năm kể từ ngày được cấp Giấy đăng ký hoạt động và Không hoạt động tại trụ sở đã đăng ký trong thời hạnh 06 tháng liên tục, kể từ ngày được cấp Giấy đăng ký hoạt động", "topic": "license"},
+{"id": 199, "q": "Tổ chức hành nghề luật sư chấm dứt hoạt động trong trường hợp:", "opts": {"a": "Công ty luật tự chấm dứt hoạt động hoặc bị thu hồi Giấy đăng ký hoạt động.", "b": "Giám đốc Công ty luật TNHH 1 thành viên bị thu hồi chứng chỉ hành nghề luật sư.", "c": "Giám đốc Công ty luật TNHH một thành viên chết", "d": "Cả 3 câu trên đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. Cả 3 câu trên đều đúng", "topic": "license"},
+{"id": 200, "q": "Tổ chức hành nghề luật sư có quyền tạm ngừng hoạt động nhưng thời gian tạm ngừng hoạt động không quá:", "opts": {"a": "Một năm", "b": "Hai năm.", "c": "Ba năm", "d": "Bốn năm"}, "ans": "b", "exp": "Đáp án đúng là: b. Hai năm.", "topic": "license"},
+{"id": 201, "q": "Tổ chức hành nghề luật sư có quyền:", "opts": {"a": "Thuê luật sư nước ngoài làm nhân viên của tổ chức mình.", "b": "Hợp tác với tổ chức hành nghề luật sư nước ngoài.", "c": "Đặt cơ sở hành nghề ở nước ngoài.", "d": "Cả ba phương án trên đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả ba phương án trên đều đúng.(Khoảng 3, 6, 7; Điều 39 LLS-VNHN 2015)", "topic": "license"},
+{"id": 202, "q": "Tổ chức hành nghề luật sư nhận tập sự bao gồm:", "opts": {"a": "Văn phòng luật sư, công ty luật; chi nhánh của văn phòng luật sư, công ty luật.", "b": "Chi nhánh của tổ chức hành nghề luật sư nước ngoài tại Việt Nam.", "c": "Công ty luật nước ngoài tại Việt Nam, chi nhánh của công ty luật nước ngoài tại Việt Nam.", "d": "Cả ba phương án đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Cả ba phương án đều đúng.(Khoản 3 Điều 4 Thông tư 10/2021/TT-BTP)", "topic": "training"},
+{"id": 203, "q": "Tổ chức hành nghề luật sư nước ngoài tại Việt Nam và luật sư Việt Nam làm việc cho tổ chức hành nghề luật sư nước ngoài tại Việt Nam, không được thực hiện những hành vi hành nghề nào sau đây :", "opts": {"a": "Chứng thực bản sao, bản dịch giấy tờ do cơ quan nhà nước, tổ chức của Việt Nam cấp.", "b": "Thực hiện các thủ tục về nuôi con nuôi, kết hôn, hộ tịch, quốc tịch Việt Nam.", "c": "Thực hiện dịch vụ công chứng, thừa phát lại và các dịch vụ pháp lý khác mà theo quy định của pháp luật Việt Nam chỉ có tổ chức hành nghề luật sư Việt Nam, tổ chức hành nghề công chứng Việt Nam, tổ chức hành nghề thừa phát lại Việt Nam mới được thực hiện.", "d": "Tất cả a, b, c đều đúng."}, "ans": "d", "exp": "Đáp án đúng là: d. Tất cả a, b, c đều đúng.(Điều 31 Nghị định 123/2013/NĐ-CP)", "topic": "license"},
+{"id": 204, "q": "Tổ chức xã hội – nghề nghiệp của luật sư gồm:", "opts": {"a": "Liên đoàn Luật sư Việt Nam.", "b": "Liên đoàn Luật sư Việt Nam và các Đoàn Luật sư ở các tỉnh, thành phố trực thuộc Trung ương.", "c": "Liên đoàn Luật sư Việt Nam, các Đoàn Luật sư ở các tỉnh, thành phố trực thuộc Trung ương và tổ chức hành nghề luật sư.", "d": "Cả ba phương án trên đều sai."}, "ans": "b", "exp": "Đáp án đúng là: b. Liên đoàn Luật sư Việt Nam và các Đoàn Luật sư ở các tỉnh, thành phố trực thuộc Trung ương.(Điều 7 LLS-VBHN 2015)", "topic": "ethics"},
+{"id": 205, "q": "Tổng thư ký Liên đoàn luật sư Việt Nam do cơ quan nào bầu:", "opts": {"a": "Bộ Tư pháp", "b": "Đại hội đại biểu luật sư toàn quốc", "c": "Hội đồng luật sư toàn quốc", "d": "Ban Thường vụ Liên đoàn luật sư Việt Nam"}, "ans": "c", "exp": "Đáp án đúng là: c. Hội đồng luật sư toàn quốc", "topic": "organization"},
+{"id": 206, "q": "Văn phòng giao dịch của tổ chức hành nghề luật sư có quyền:", "opts": {"a": "Thực hiện việc cung cấp dịch vụ pháp lý.", "b": "Tiếp nhận vụ, việc, yêu cầu của khách hàng.", "c": "Tiếp nhận vụ, việc, yêu cầu của khách hàng và cung cấp dịch vụ pháp cho khách hàng.", "d": "Tiếp nhận vụ, việc, yêu cầu của khách hàng, cung cấp dịch vụ pháp lý cho khách hàng, quản lý luật sư và người tập sự hành nghề luật sư làm việc tại Văn phòng giao dịch."}, "ans": "b", "exp": "Đáp án đúng là: b. Tiếp nhận vụ, việc, yêu cầu của khách hàng.", "topic": "license"},
+{"id": 207, "q": "Văn phòng giao dịch của tổ chức hành nghề luật sư được thành lập ở:", "opts": {"a": "Trong phạm vi tỉnh, thành phố trực thuộc trung ương nơi tổ chức hành nghề luật sư đăng ký hoạt động.", "b": "Ngoài phạm vi tỉnh, thành phố trực thuộc trung ương nơi tổ chức hành nghề luật sư đăng ký hoạt động.", "c": "Trong hoặc ngoài phạm vi tỉnh, thành phố trực thuộc trung ương nơi tổ chức hành nghề luật sư đăng ký hoạt động."}, "ans": "a", "exp": "Đáp án đúng là: a. Trong phạm vi tỉnh, thành phố trực thuộc trung ương nơi tổ chức hành nghề luật sư đăng ký hoạt động.", "topic": "license"},
+{"id": 208, "q": "Với tư cách là thành viên của Liên đoàn luật sư Việt Nam, luật sư có nghĩa vụ:", "opts": {"a": "Đoàn kết, hợp tác với các luật sư khác để thực hiện tôn chỉ, mục đích của Liên đoàn luật sư Việt Nam", "b": "Giữ gìn uy tín của Liên đoàn luật sư Việt", "c": "Nộp phí thành viên đầy đủ và đúng kỳ hạn", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "organization"},
+{"id": 209, "q": "Với tư cách là thành viên của Liên đoàn luật sư Việt Nam, luật sư có quyền:", "opts": {"a": "Đề nghị Liên đoàn luật sư Việt Nam đại diện, bảo vệ quyền, lợi ích hợp pháp trong hoạt động hành nghề.", "b": "Tự ứng cử tham dự Đại hội đại biểu luật sư toàn quốc, các cơ quan của Liên đoàn luật sư.", "c": "Đề xuất ý kiến về việc củng cố, phát triển tổ chức, hoạt động của Liên đoàn luật sư Việt Nam", "d": "a, b, c đều đúng"}, "ans": "d", "exp": "Đáp án đúng là: d. a, b, c đều đúng", "topic": "organization"},
+{"id": 210, "q": "Điều kiện hành nghề của luật sư là có chứng chỉ hành nghề luật sư do Bộ tư pháp cấp.", "opts": {"a": "Đúng", "b": "Sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Sai", "topic": "license"},
+{"id": 211, "q": "Điều kiện hành nghề của luật sư là:", "opts": {"a": "Có giấy chứng nhận đã đủ kỳ kiểm tra kết quả tập sự hành nghề luật sư.", "b": "Có chứng chỉ hành nghề luật sư do bộ Tư pháp cấp.", "c": "Có chứng chỉ hành nghề luật sư do Bộ Tư pháp cấp và gia nhập 1 đoàn luật sư.", "d": "Cả ba phương án trên đều sai."}, "ans": "c", "exp": "Đáp án đúng là: c. Có chứng chỉ hành nghề luật sư do Bộ Tư pháp cấp và gia nhập 1 đoàn luật sư.(Điều 11 VBHN LLS 2015)", "topic": "license"},
+{"id": 212, "q": "Điều kiện thành lập tổ chức hành nghề luật sư là điều kiện nào dưới đây:", "opts": {"a": "Luật sư thành lập hoặc tham gia thành lập tổ chức hành nghề luật sư phải có ít nhất hai năm hành nghề liên tục làm việc theo hợp đồng lao động cho tổ chức hành nghề luật sư.", "b": "Luật sư thành lập hoặc tham gia thành lập tổ chức hành nghề luật sư phải được cấp chứng chỉ hành nghề luật sư ít nhất 2 năm.", "c": "Luật sư thành lập hoặc tham gia thành lập tổ chức hành nghề luật sư phải gia nhập Đoàn luật sư ít nhất 2 năm.", "d": "Cả ba phương án trên đều sai."}, "ans": "a", "exp": "Đáp án đúng là: a. Luật sư thành lập hoặc tham gia thành lập tổ chức hành nghề luật sư phải có ít nhất hai năm hành nghề liên tục làm việc theo hợp đồng lao động cho tổ chức hành nghề luật sư.(điểm a, khoản 3, Điều 32 LLS VBNH 2015)", "topic": "license"},
+{"id": 213, "q": "Đối với những vụ án do cơ quan tiến hành tố tụng yêu cầu luật sư thì mức thù lao được trả cho 01 ngày làm việc của luật sư là 01 ngày lương theo mức lương tối thiểu vùng.", "opts": {"a": "Đúng", "b": "Sai"}, "ans": "b", "exp": "Đáp án đúng là: b. Sai", "topic": "fee"},
+{"id": 214, "q": "Đối với những vụ án do cơ quan tiến hành tố tụng yêu cầu luật sư thì mức thù lao được trả cho 01 ngày làm việc của luật sư là:", "opts": {"a": "01 ngày lương theo mức lương tối thiểu vùng.", "b": "0,4 lần mức lương cơ sở do Chính phủ quy định.", "c": "0,8 lần mức lương cơ sở và các khoản phụ cấp khác do Chính phủ quy định.", "d": "01 ngày lương theo mức lương tối thiểu vùng và phụ cấp tàu xe, lưu trú (nếu có)."}, "ans": "b", "exp": "Đáp án đúng là: b. 0,4 lần mức lương cơ sở do Chính phủ quy định.(Khoản 1 Điều 19 Nghị định 123/2013/NĐ-CP)", "topic": "fee"},
+{"id": 215, "q": "Đối với trường hợp tạm giữ trong vụ án hình sự, Luật Luật sư (đã được sửa đổi, bổ sung vào năm 2012) quy định kể từ khi nhận đủ giấy tờ hợp lệ, cơ quan tiến hành tố tụng cấp Giấy chứng nhận người bào chữa cho luật sư trong thời hạn:", "opts": {"a": "3 ngày làm việc", "b": "48 giờ", "c": "24 giờ (theo BLTTHS)", "d": "Cả 3 câu trên đều sai"}, "ans": "c", "exp": "Đáp án đúng là: c. 24 giờ (theo BLTTHS)", "topic": "court"}
+];
+
+/* ── STATE ── */
+let wrongIds = new Set(), answeredIds = new Set(), history = [];
+let sess = { qs:[], idx:0, correct:0, wrongs:[], review:false };
+
+/* ── STORAGE ── */
+function save() {
+  try {
+    localStorage.setItem('lq_w', JSON.stringify([...wrongIds]));
+    localStorage.setItem('lq_a', JSON.stringify([...answeredIds]));
+    localStorage.setItem('lq_h', JSON.stringify(history));
+  } catch(e){}
+}
+function load() {
+  try {
+    const w=localStorage.getItem('lq_w'), a=localStorage.getItem('lq_a'), h=localStorage.getItem('lq_h');
+    if(w) wrongIds=new Set(JSON.parse(w));
+    if(a) answeredIds=new Set(JSON.parse(a));
+    if(h) history=JSON.parse(h);
+  } catch(e){}
+}
+
+/* ── UTIL ── */
+function shuffle(a) {
+  const b=[...a];
+  for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}
+  return b;
+}
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='homeScreen') refreshHome();
+  if(id==='historyScreen') renderHistory();
+}
+function exitQuiz() { if(confirm('Thoát bài đang làm?')) showScreen('homeScreen'); }
+function confirmReset() {
+  if(confirm('Xóa toàn bộ dữ liệu luyện tập?')) {
+    wrongIds=new Set(); answeredIds=new Set(); history=[];
+    save(); refreshHome();
+  }
+}
+function refreshHome() {
+  document.getElementById('statAnswered').textContent = answeredIds.size;
+  document.getElementById('statWrong').textContent = wrongIds.size;
+  const btn=document.getElementById('btnReview');
+  const badge=document.getElementById('wrongBadge');
+  if(wrongIds.size>0){
+    btn.disabled=false; badge.style.display='inline';
+    badge.textContent=wrongIds.size>99?'99+':wrongIds.size;
+  } else { btn.disabled=true; badge.style.display='none'; }
+}
+
+/* ── QUIZ ── */
+function startQuiz(mode) {
+  sess.review=(mode==='review');
+  let pool;
+  if(sess.review){
+    pool=QUESTIONS.filter(q=>wrongIds.has(q.id));
+    if(!pool.length){alert('Không có câu sai để ôn!');return;}
+  } else {
+    const unseen=shuffle(QUESTIONS.filter(q=>!answeredIds.has(q.id)));
+    const seen=shuffle(QUESTIONS.filter(q=>answeredIds.has(q.id)));
+    pool=[...unseen,...seen];
+  }
+  sess.qs=shuffle(pool).slice(0,20);
+  sess.idx=0; sess.correct=0; sess.wrongs=[];
+
+  document.getElementById('qTot').textContent=sess.qs.length;
+  const pill=document.getElementById('modePill');
+  if(sess.review){ pill.textContent='🔁 Ôn Câu Sai'; pill.className='mode-pill review'; }
+  else { pill.textContent='📝 Bài Luyện Tập'; pill.className='mode-pill'; }
+
+  showScreen('quizScreen');
+  renderQ();
+}
+
+function renderQ() {
+  const q=sess.qs[sess.idx];
+  const pct=(sess.idx/sess.qs.length*100).toFixed(1);
+  document.getElementById('qCur').textContent=sess.idx+1;
+  document.getElementById('progBar').style.width=pct+'%';
+
+  // Image
+  const cfg=TOPICS[q.topic]||TOPICS.general;
+  const imgUrl=cfg.imgs[q.id%cfg.imgs.length];
+  const img=document.getElementById('qImg');
+  img.style.display='block';
+  img.src=imgUrl;
+  img.onerror=function(){this.style.display='none';};
+  document.getElementById('qTopicTag').textContent=cfg.label;
+  document.getElementById('qFileRef').innerHTML=`Câu <strong>#${q.id}</strong> trong file Word`;
+
+  // Question text
+  document.getElementById('qText').textContent=q.q;
+
+  // Options
+  const ol=document.getElementById('optsList');
+  ol.innerHTML='';
+  Object.entries(q.opts).forEach(([k,v])=>{
+    const btn=document.createElement('button');
+    btn.className='opt'; btn.dataset.key=k;
+    btn.onclick=()=>pick(k,q);
+    btn.innerHTML=`<span class="opt-key">${k.toUpperCase()}</span><span class="opt-label">${v}</span>`;
+    ol.appendChild(btn);
+  });
+
+  // Reset UI
+  document.getElementById('expBox').classList.remove('show');
+  document.getElementById('btnNext').style.display='none';
+  document.getElementById('btnFinish').style.display='none';
+}
+
+function pick(chosen,q) {
+  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  const correct=q.ans;
+  document.querySelectorAll('.opt').forEach(btn=>{
+    const k=btn.dataset.key;
+    if(k===correct) btn.classList.add('correct');
+    else if(k===chosen&&chosen!==correct) btn.classList.add('wrong');
+  });
+
+  answeredIds.add(q.id);
+  if(chosen===correct){ sess.correct++; wrongIds.delete(q.id); }
+  else {
+    sess.wrongs.push({id:q.id,q:q.q.slice(0,88)+(q.q.length>88?'…':''),a:q.opts[correct]||''});
+    wrongIds.add(q.id);
+  }
+  save();
+
+  document.getElementById('expText').textContent=q.exp;
+  document.getElementById('expBox').classList.add('show');
+
+  const last=sess.idx===sess.qs.length-1;
+  document.getElementById(last?'btnFinish':'btnNext').style.display='flex';
+}
+
+function nextQ() { sess.idx++; renderQ(); }
+
+function finishQuiz() {
+  const total=sess.qs.length;
+  const pct=Math.round(sess.correct/total*100);
+  document.getElementById('rScore').textContent=pct+'%';
+  document.getElementById('rCorrect').textContent=sess.correct;
+  document.getElementById('rWrong').textContent=total-sess.correct;
+  document.getElementById('rTotal').textContent=total;
+
+  const g=document.getElementById('rGrade');
+  if(pct>=85){g.textContent='🏆 Xuất Sắc';g.className='grade-chip g-a';}
+  else if(pct>=70){g.textContent='👍 Khá Giỏi';g.className='grade-chip g-b';}
+  else if(pct>=50){g.textContent='📖 Cần Ôn Thêm';g.className='grade-chip g-c';}
+  else{g.textContent='💪 Hãy Cố Gắng Lên';g.className='grade-chip g-d';}
+
+  const ws=document.getElementById('wrongSection');
+  if(sess.wrongs.length){
+    ws.style.display='block';
+    document.getElementById('wrongItems').innerHTML=sess.wrongs.map(w=>
+      `<div class="wi"><div class="wi-q">#${w.id}: ${w.q}</div><div class="wi-a">✓ ${w.a}</div></div>`
+    ).join('');
+  } else ws.style.display='none';
+
+  document.getElementById('btnResultReview').style.display=wrongIds.size>0?'flex':'none';
+
+  const now=new Date();
+  const ds=now.toLocaleDateString('vi-VN')+' '+now.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});
+  const nm=sess.review?'Ôn câu sai':`Bài luyện #${history.filter(h=>!h.review).length+1}`;
+  history.unshift({name:nm,date:ds,pct,correct:sess.correct,total,review:sess.review});
+  if(history.length>60) history.pop();
+  save();
+  showScreen('resultScreen');
+}
+
+/* ── HISTORY ── */
+function renderHistory() {
+  const el=document.getElementById('histList');
+  if(!history.length){
+    el.innerHTML=`<div class="empty-state"><div class="empty-ico">📋</div>Chưa có bài nào được làm.<br>Bắt đầu luyện tập nào! 💪</div>`;
+    return;
+  }
+  el.innerHTML=history.map((h,i)=>{
+    const ico=h.review?'🔁':['📝','📚','🎯','✍️','📖'][i%5];
+    const pc=h.pct>=70?'#065f46':h.pct>=50?'#b45309':'#991b1b';
+    return `<div class="hi">
+      <div class="hi-icon ${h.review?'review':''}">${ico}</div>
+      <div class="hi-info">
+        <div class="hi-name">${h.name}</div>
+        <div class="hi-date">${h.date}</div>
+      </div>
+      <div class="hi-right">
+        <div class="hi-pct" style="color:${pc}">${h.pct}%</div>
+        <div class="hi-sub">${h.correct}/${h.total} đúng</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── INIT ── */
+load();
+refreshHome();
+</script>
+</body>
+</html>
